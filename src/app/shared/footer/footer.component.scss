@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: $picpay-primary;
+
+  &__text {
+    @extend .container;
+
+    color: white;
+    font-family: $textFont;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  &__link {
+    color: inherit;
+  }
+}
