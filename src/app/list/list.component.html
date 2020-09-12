@@ -1,19 +1,12 @@
 <section class="list">
   <ul class="list__content">
-    <li class="list__item">
-      <app-user></app-user>
-    </li>
-    <li class="list__item">
-      <app-user></app-user>
-    </li>
-    <li class="list__item">
-      <app-user></app-user>
-    </li>
-    <li class="list__item">
-      <app-user></app-user>
-    </li>
-    <li class="list__item">
-      <app-user></app-user>
+    <li *ngFor="let user of users" class="list__item">
+      <app-user
+        [id]="user.id"
+        [name]="user.name"
+        [image]="user.img"
+        [username]="user.username"
+      ></app-user>
     </li>
   </ul>
 </section>

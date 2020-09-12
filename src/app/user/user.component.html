@@ -1,12 +1,12 @@
 <div class="user">
-  <img class="user__image" src="https://randomuser.me/api/portraits/women/2.jpg" />
+  <img class="user__image" [src]="image" />
   <div class="user__info">
     <div class="user__name">
-      Cynthia Costa
+      {{ name }}
     </div>
 
     <div class="user__id">
-      ID: 23 - Username: @cycosta
+      ID: {{ id }} - Username: {{ username }}
     </div>
   </div>
 
