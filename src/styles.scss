@@ -1,10 +1,9 @@
-* {
-  box-sizing: border-box;
-}
+// Base
+@import './assets/stylesheets/base/hacks';
+@import './assets/stylesheets/base/hacks';
 
-html,
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-}
+// Settings
+@import './assets/stylesheets/settings/breakpoints';
+@import './assets/stylesheets/settings/container';
+@import './assets/stylesheets/settings/typography';
+@import './assets/stylesheets/settings/colors';
