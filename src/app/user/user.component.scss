@@ -1,0 +1,63 @@
+@import '../../styles.scss';
+
+.user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 95%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 100px;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .1);
+
+  &__image {
+    width: 70px;
+    margin-right: 10px;
+    border: 2px solid $picpay-primary;
+    border-radius: 100%;
+
+    @include breakpoint(desktop) {
+      width: 80px;
+      margin-right: 20px;
+    }
+  }
+
+  &__name {
+    color: $onyx;
+    font-family: $titleFont;
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    @include breakpoint(desktop) {
+      font-size: 2.2rem;
+    }
+  }
+
+  &__id {
+    margin-top: 5px;
+    color: $silver;
+    font-family: $titleFont;
+    font-size: 1.2rem;
+
+    @include breakpoint(desktop) {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 50px;
+    height: 50px;
+    background-color: $picpay-primary;
+    border: 0;
+    border-radius: 50px;
+    transform: translateY(-50%);
+
+    @include breakpoint(desktop) {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import '../../styles.scss';
+
+.list {
+  @extend .container;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
