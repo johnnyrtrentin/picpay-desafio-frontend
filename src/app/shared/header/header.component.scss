@@ -1,0 +1,12 @@
+@import '../../../styles.scss';
+
+.header {
+  padding: 20px 0;
+  background-color: $picpay-primary;
+  text-align: center;
+
+  &__image {
+    width: 100%;
+    max-width: 120px;
+  }
+}

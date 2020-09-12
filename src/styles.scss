@@ -1,9 +1,9 @@
 // Base
 @import './assets/stylesheets/base/hacks';
-@import './assets/stylesheets/base/hacks';
+@import './assets/stylesheets/base/reset';
 
 // Settings
+@import './assets/stylesheets/settings/colors';
 @import './assets/stylesheets/settings/breakpoints';
 @import './assets/stylesheets/settings/container';
 @import './assets/stylesheets/settings/typography';
-@import './assets/stylesheets/settings/colors';
