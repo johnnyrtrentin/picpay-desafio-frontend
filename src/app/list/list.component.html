@@ -1,8 +1,7 @@
 <section class="list">
   <ul class="list__content">
-    <li *ngFor="let user of users" class="list__item">
+    <li *ngFor="let user of users; trackBy: identify" class="list__item">
       <app-user
-        [id]="user.id"
         [name]="user.name"
         [image]="user.img"
         [username]="user.username"

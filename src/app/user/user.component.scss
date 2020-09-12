@@ -33,11 +33,11 @@
     }
   }
 
-  &__id {
+  &__username {
     margin-top: 5px;
     color: $silver;
     font-family: $titleFont;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 
     @include breakpoint(desktop) {
       font-size: 1.6rem;
