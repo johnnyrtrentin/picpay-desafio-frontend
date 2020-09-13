@@ -1,16 +1,16 @@
 <div class="user">
-  <img class="user__image" [src]="image" [alt]="name" />
+  <img class="user__image" [src]="user.img" [alt]="user.name" />
   <div class="user__info">
     <div class="user__name">
-      {{ name }}
+      {{ user.name }}
     </div>
 
     <div class="user__username">
-      {{ username }}
+      {{ user.username }}
     </div>
   </div>
 
-  <button type="button" class="user__button" (click)="openModal()">
+  <button type="button" class="user__button" (click)="this.onClick(user)">
     <app-pay></app-pay>
   </button>
 </div>

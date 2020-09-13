@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'app-user',
@@ -7,11 +7,16 @@ import { Component, OnInit, Input } from '@angular/core'
 })
 export class UserComponent implements OnInit {
 
-  @Input() name: string
-  @Input() image: string
-  @Input() username: string
+  @Input() user: object
+  @Output() toggleModal = new EventEmitter<boolean>()
+  @Output() selectUser = new EventEmitter<object>()
 
   constructor() { }
+
+  onClick(user) {
+    this.toggleModal.emit(true)
+    this.selectUser.emit(user)
+  }
 
   ngOnInit() { }
 

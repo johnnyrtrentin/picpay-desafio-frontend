@@ -21,19 +21,15 @@
   }
 
   &__content {
-    position: absolute;
-    bottom: 0;
+    position: relative;
     width: 90%;
     background-color: white;
     border: 1px solid $silver;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-radius: 15px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
 
-    @include breakpoint(desktop) {
-      bottom: unset;
+    @include breakpoint(tablet) {
       width: 500px;
-      border-radius: 15px;
     }
   }
 
