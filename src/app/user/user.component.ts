@@ -11,13 +11,13 @@ export class UserComponent implements OnInit {
   @Output() toggleModal = new EventEmitter<boolean>()
   @Output() selectUser = new EventEmitter<object>()
 
-  constructor() { }
+  constructor() {}
 
   onClick(user) {
     this.toggleModal.emit(true)
     this.selectUser.emit(user)
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
 }

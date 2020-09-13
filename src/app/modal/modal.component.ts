@@ -10,8 +10,8 @@ export class ModalComponent implements OnInit {
   @Input() isVisible: boolean
   @Output() toggleModal = new EventEmitter<boolean>()
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
 }

@@ -8,9 +8,12 @@ import { SharedModule } from './shared/shared.module'
 import { ListComponent } from './list/list.component'
 import { UserComponent } from './user/user.component'
 import { ModalComponent } from './modal/modal.component';
+import { AlertComponent } from './alert/alert.component';
 
 // Icons
 import { PayComponent } from './icons/pay/pay.component'
+import { SuccessComponent } from './icons/success/success.component'
+import { FailureComponent } from './icons/failure/failure.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { PayComponent } from './icons/pay/pay.component'
     ListComponent,
     UserComponent,
     PayComponent,
-    ModalComponent
+    ModalComponent,
+    AlertComponent,
+    SuccessComponent,
+    FailureComponent
    ],
   imports: [
     BrowserModule,
