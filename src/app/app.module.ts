@@ -18,7 +18,7 @@ import { PayComponent } from './icons/pay/pay.component'
     ListComponent,
     UserComponent,
     PayComponent,
-      ModalComponent
+    ModalComponent
    ],
   imports: [
     BrowserModule,

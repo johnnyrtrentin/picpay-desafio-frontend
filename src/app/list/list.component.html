@@ -8,5 +8,29 @@
       ></app-user>
     </li>
   </ul>
-  <app-modal></app-modal>
+
+  <!-- Payment modal -->
+  <app-modal>
+    <div title>Pagar</div>
+    <div body>
+      <div class="modal__user">
+        <img class="modal__user-image" src="https://pbs.twimg.com/profile_images/1284479684718338054/ys-x9JGI_400x400.jpg" alt="Cynthia Costa">
+        <p class="modal__user-name">@cycosta</p>
+      </div>
+      <form class="modal__form" action="">
+        <input class="modal__form-input" type="number" name="value" />
+        <div class="modal__select-helper">
+          <select class="modal__form-select" name="card" id="">
+            <option value="1111111111111111">
+              Cartão com final 1111
+            </option>
+            <option value="4111111111111234">
+              Cartão com final 1234
+            </option>
+          </select>
+        </div>
+        <button class="modal__form-button">Pagar</button>
+      </form>
+    </div>
+  </app-modal>
 </section>
