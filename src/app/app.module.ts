@@ -7,6 +7,7 @@ import { AppComponent } from './app.component'
 import { SharedModule } from './shared/shared.module'
 import { ListComponent } from './list/list.component'
 import { UserComponent } from './user/user.component'
+import { ModalComponent } from './modal/modal.component';
 
 // Icons
 import { PayComponent } from './icons/pay/pay.component'
@@ -16,7 +17,8 @@ import { PayComponent } from './icons/pay/pay.component'
     AppComponent,
     ListComponent,
     UserComponent,
-    PayComponent
+    PayComponent,
+      ModalComponent
    ],
   imports: [
     BrowserModule,
