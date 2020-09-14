@@ -10,6 +10,10 @@
       </h3>
     </div>
     <div class="modal__body">
+      <div class="modal__user">
+        <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
+        <p class="modal__user-name">{{ selectedUser?.username }}</p>
+      </div>
       <form class="modal__form" action="">
         <input class="modal__form-input" type="number" name="value" />
         <div class="modal__select-helper">

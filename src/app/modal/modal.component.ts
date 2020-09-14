@@ -9,6 +9,7 @@ export class ModalComponent implements OnInit {
 
   @Input() isVisible: boolean
   @Output() toggleModal = new EventEmitter<boolean>()
+  @Input() selectedUser: object
 
   cards = [
     // valid card

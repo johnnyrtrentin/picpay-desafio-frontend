@@ -13,8 +13,9 @@
 <!-- Payment modal -->
 <app-modal
   [isVisible]="modalVisible"
-  (toggleModal)="toggleModal($event)">
-</app-modal>
+  (toggleModal)="toggleModal($event)"
+  [selectedUser]="selectedUser"
+></app-modal>
 
 <!-- Success and failure alerts -->
 <app-alert>
