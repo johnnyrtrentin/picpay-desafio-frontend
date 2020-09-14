@@ -1,4 +1,4 @@
-<form class="form" #f="ngForm" (ngSubmit)="handleSubmit(f)">
+<form class="form" #paymentForm="ngForm" (ngSubmit)="handleSubmit(paymentForm)">
   <input
     ngModel
     name="transferValue"
@@ -7,6 +7,7 @@
     class="form__input"
     currencyMask
     [options]="currencyMask"
+    [ngClass]="{'form__input--error': valueControl.touched && !valueControl.valid}"
   />
   <div class="form__alert" *ngIf="valueControl.touched && !valueControl.valid">
     <p *ngIf="valueControl.errors.required">Você deve inserir um valor</p>

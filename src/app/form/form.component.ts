@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import {NgForm} from '@angular/forms'
+import { NgForm } from '@angular/forms'
 
 @Component({
   selector: 'app-form',
@@ -36,8 +36,17 @@ export class FormComponent {
 
   mainCard: string = this.cards[0].card_number.slice(-4)
 
-  handleSubmit(f: NgForm) {
-    console.log(f.value)
+  // errors: object = {transferValue: false, card: false}
+
+  handleSubmit(paymentForm: NgForm) {
+
+    if (paymentForm.invalid) {
+      Object.keys(paymentForm.controls).forEach(key => {
+        paymentForm.controls[key].markAsTouched()
+      })
+      return
+    }
+    console.log(paymentForm)
   }
 
 }

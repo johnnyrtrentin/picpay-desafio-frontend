@@ -6,12 +6,17 @@
   margin-top: 20px;
 
   &__input {
+    position: relative;
     padding: 10px;
     color: $onyx;
     background-color: transparent;
     border: 1px solid $picpay-primary;
     border-radius: 5px;
     font-size: 1.4rem;
+
+    &--error {
+      border-left: 3px solid $radical-red;
+    }
   }
 
   &__select-helper {
