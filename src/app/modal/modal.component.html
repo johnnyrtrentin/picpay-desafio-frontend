@@ -14,17 +14,7 @@
         <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
         <p class="modal__user-name">{{ selectedUser?.username }}</p>
       </div>
-      <form class="modal__form" action="">
-        <input class="modal__form-input" type="number" name="value" />
-        <div class="modal__select-helper">
-          <select class="modal__form-select" name="card" id="">
-            <option *ngFor="let card of cards" [value]="card.card_number">
-              Cartão com final {{ card.card_number | card }}
-            </option>
-          </select>
-        </div>
-        <button class="modal__form-button">Pagar</button>
-      </form>
+      <app-form></app-form>
     </div>
   </div>
 </div>

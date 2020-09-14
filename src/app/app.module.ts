@@ -9,15 +9,18 @@ import { ListComponent } from './list/list.component'
 import { UserComponent } from './user/user.component'
 import { ModalComponent } from './modal/modal.component';
 import { AlertComponent } from './alert/alert.component';
+import { FormComponent } from './form/form.component';
 
 // Icons
 import { PayComponent } from './icons/pay/pay.component'
 import { SuccessComponent } from './icons/success/success.component'
 import { FailureComponent } from './icons/failure/failure.component'
+
+// Pipes
 import { CardPipe } from './card.pipe';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     ListComponent,
     UserComponent,
@@ -26,7 +29,8 @@ import { CardPipe } from './card.pipe';
     AlertComponent,
     SuccessComponent,
     FailureComponent,
-      CardPipe
+    CardPipe,
+    FormComponent
    ],
   imports: [
     BrowserModule,
