@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
 
   cards = [
     // valid card
@@ -21,10 +21,5 @@ export class FormComponent implements OnInit {
       expiry_date: '01/20',
     },
   ]
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

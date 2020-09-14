@@ -45,6 +45,16 @@
     appearance: none;
   }
 
+  &__alert {
+    margin-top: 5px;
+    padding: 10px;
+    color: $radical-red;
+    background-color: rgba($color: $radical-red, $alpha: .1);
+    border-radius: 3px;
+    font-family: $textFont;
+    font-size: 1.2rem;
+  }
+
   &__button {
     padding: 10px 20px;
     color: white;
