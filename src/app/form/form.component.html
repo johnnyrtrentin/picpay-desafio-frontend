@@ -1,7 +1,7 @@
-<form class="form">
+<form class="form" #f="ngForm" (ngSubmit)="handleSubmit(f)">
   <input
     ngModel
-    name="value"
+    name="transferValue"
     required
     #valueControl="ngModel"
     class="form__input"
@@ -12,8 +12,12 @@
     <p *ngIf="valueControl.errors.required">Você deve inserir um valor</p>
   </div>
   <div class="form__select-helper">
-    <select name="card" class="form__select" id="">
-      <option *ngFor="let card of cards; first as isFirst" [value]="card.card_number | card" [attr.selected]="isFirst ? 'selected' : null">
+    <select name="card" [ngModel]="mainCard" class="form__select">
+      <option
+        *ngFor="let card of cards; first as isFirst"
+        [ngValue]="card.card_number | card"
+        [attr.selected]="isFirst ? 'selected' : null"
+      >
         Cartão com final {{ card.card_number | card }}
       </option>
     </select>

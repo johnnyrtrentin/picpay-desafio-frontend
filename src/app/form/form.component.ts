@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
+import {NgForm} from '@angular/forms'
 
 @Component({
   selector: 'app-form',
@@ -31,5 +33,11 @@ export class FormComponent {
       expiry_date: '01/20',
     },
   ]
+
+  mainCard: string = this.cards[0].card_number.slice(-4)
+
+  handleSubmit(f: NgForm) {
+    console.log(f.value)
+  }
 
 }
