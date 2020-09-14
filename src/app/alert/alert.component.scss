@@ -17,7 +17,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .5);
   }
 
   &__content {
@@ -68,7 +68,7 @@
     display: block;
     width: 15px;
     height: 2px;
-    background-color: $picpay-primary;
+    background-color: $silver;
     transform: rotate(45deg);
 
     &::after {
@@ -77,7 +77,7 @@
       content: '';
       width: 15px;
       height: 2px;
-      background-color: $picpay-primary;
+      background-color: $silver;
       transform: rotate(90deg);
     }
   }

@@ -1,4 +1,4 @@
-<div class="alert" role="dialog" tabindex="-1">
+<div class="alert" role="dialog" tabindex="-1" *ngIf="isVisible">
   <div class="alert__mask"></div>
   <div class="alert__content">
     <button class="alert__close">
@@ -7,7 +7,7 @@
     <div class="alert__image">
       <ng-content select="[image]"></ng-content>
     </div>
-    <p class="alert__message" [ngClass]="{'alert__message--failure': failed}">
+    <p class="alert__message" [ngClass]="{'alert__message--failure': failure}">
       <ng-content select="[message]"></ng-content>
     </p>
   </div>

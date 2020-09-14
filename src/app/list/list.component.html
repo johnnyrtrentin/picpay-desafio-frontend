@@ -11,36 +11,26 @@
 </section>
 
 <!-- Payment modal -->
-<app-modal [isVisible]="modalVisible" (toggleModal)="toggleModal($event)">
-  <div title>Pagar</div>
-  <div body>
-    <div class="modal__user">
-      <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
-      <p class="modal__user-name">{{ selectedUser?.username }}</p>
-    </div>
-    <form class="modal__form" action="">
-      <input class="modal__form-input" type="number" name="value" />
-      <div class="modal__select-helper">
-        <select class="modal__form-select" name="card" id="">
-          <option value="1111111111111111">
-            Cartão com final 1111
-          </option>
-          <option value="4111111111111234">
-            Cartão com final 1234
-          </option>
-        </select>
-      </div>
-      <button class="modal__form-button">Pagar</button>
-    </form>
-  </div>
+<app-modal
+  [isVisible]="modalVisible"
+  (toggleModal)="toggleModal($event)">
 </app-modal>
 
-<!-- Success/failure alert -->
+<!-- Success and failure alerts -->
 <app-alert>
   <div image>
     <app-success></app-success>
   </div>
   <div message>
     O pagamento foi concluído com sucesso!
+  </div>
+</app-alert>
+
+<app-alert [failure]="true">
+  <div image>
+    <app-failure></app-failure>
+  </div>
+  <div message>
+    O pagamento não foi concluído com sucesso.
   </div>
 </app-alert>

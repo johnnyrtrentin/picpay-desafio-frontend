@@ -14,9 +14,10 @@ import { AlertComponent } from './alert/alert.component';
 import { PayComponent } from './icons/pay/pay.component'
 import { SuccessComponent } from './icons/success/success.component'
 import { FailureComponent } from './icons/failure/failure.component'
+import { CardPipe } from './card.pipe';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     ListComponent,
     UserComponent,
@@ -24,7 +25,8 @@ import { FailureComponent } from './icons/failure/failure.component'
     ModalComponent,
     AlertComponent,
     SuccessComponent,
-    FailureComponent
+    FailureComponent,
+      CardPipe
    ],
   imports: [
     BrowserModule,
