@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -6,6 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
+
+  currencyMask = {
+    align: "left",
+    allowZero: true,
+    decimal: ",",
+    precision: 2,
+    prefix: "R$ ",
+    thousands: ".",
+    nullable: true
+  }
 
   cards = [
     // valid card

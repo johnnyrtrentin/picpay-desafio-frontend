@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
+import { NgxCurrencyModule } from "ngx-currency";
 
 // Components
 import { AppComponent } from './app.component'
@@ -37,7 +38,8 @@ import { CardPipe } from './card.pipe';
     BrowserModule,
     HttpClientModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    NgxCurrencyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

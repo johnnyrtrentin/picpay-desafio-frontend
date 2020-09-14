@@ -1,11 +1,19 @@
 <form class="form">
-  <input ngModel name="value" required #valueControl="ngModel" class="form__input" type="number" />
+  <input
+    ngModel
+    name="value"
+    required
+    #valueControl="ngModel"
+    class="form__input"
+    currencyMask
+    [options]="currencyMask"
+  />
   <div class="form__alert" *ngIf="valueControl.touched && !valueControl.valid">
     <p *ngIf="valueControl.errors.required">Você deve inserir um valor</p>
   </div>
   <div class="form__select-helper">
-    <select ngModel name="card" class="form__select" id="">
-      <option *ngFor="let card of cards" [value]="card.card_number">
+    <select name="card" class="form__select" id="">
+      <option *ngFor="let card of cards; first as isFirst" [value]="card.card_number | card" [attr.selected]="isFirst ? 'selected' : null">
         Cartão com final {{ card.card_number | card }}
       </option>
     </select>
