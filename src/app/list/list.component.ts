@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 
 @Component({
@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   users: {}
   selectedUser: {}
@@ -22,14 +22,12 @@ export class ListComponent implements OnInit {
     return user.id
   }
 
-  toggleModal() {
-    this.modalVisible = !this.modalVisible
-  }
-
   selectUser(user) {
     this.selectedUser = user
   }
 
-  ngOnInit() {}
+  toggleModal() {
+    this.modalVisible = !this.modalVisible
+  }
 
 }

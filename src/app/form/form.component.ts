@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms'
 
@@ -8,6 +8,8 @@ import { NgForm } from '@angular/forms'
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
+
+  @Input() userId: number
 
   currencyMask = {
     align: "left",
@@ -36,17 +38,40 @@ export class FormComponent {
 
   mainCard: string = this.cards[0].card_number.slice(-4)
 
-  // errors: object = {transferValue: false, card: false}
+  constructor(private http: HttpClient) { }
+
+  makePayment({ userId, transferValue, selectedCard }) {
+    const { card_number, cvv, expiry_date } = this.cards.find(card => (
+      card.card_number.slice(-4) === selectedCard
+    ))
+
+    this.http.post('https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989', {
+      card_number: card_number,
+      cvv: cvv,
+      expiry_date: expiry_date,
+      destination_user_id: userId,
+      value: transferValue
+    }).subscribe((data) => {
+      console.log(data)
+      // mockup logic
+      const validCard = '1111111111111111'
+      if (card_number === validCard) {
+        console.log('Sucesso')
+      } else {
+        console.log('Falha')
+      }
+    })
+  }
 
   handleSubmit(paymentForm: NgForm) {
-
     if (paymentForm.invalid) {
       Object.keys(paymentForm.controls).forEach(key => {
         paymentForm.controls[key].markAsTouched()
       })
       return
     }
-    console.log(paymentForm)
+
+    this.makePayment(paymentForm.value)
   }
 
 }

@@ -1,4 +1,5 @@
 <form class="form" #paymentForm="ngForm" (ngSubmit)="handleSubmit(paymentForm)">
+  <input type="number" [ngModel]="userId" name="userId" hidden />
   <input
     ngModel
     name="transferValue"
@@ -13,7 +14,7 @@
     <p *ngIf="valueControl.errors.required">Você deve inserir um valor</p>
   </div>
   <div class="form__select-helper">
-    <select name="card" [ngModel]="mainCard" class="form__select">
+    <select name="selectedCard" [ngModel]="mainCard" class="form__select">
       <option
         *ngFor="let card of cards; first as isFirst"
         [ngValue]="card.card_number | card"

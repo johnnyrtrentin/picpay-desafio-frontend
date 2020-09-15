@@ -14,7 +14,7 @@
         <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
         <p class="modal__user-name">{{ selectedUser?.username }}</p>
       </div>
-      <app-form></app-form>
+      <app-form [userId]="selectedUser?.id"></app-form>
     </div>
   </div>
 </div>
