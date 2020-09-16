@@ -25,13 +25,13 @@ export class FormComponent {
   }
 
   cards = [
-    // valid card
+    // Valid card
     {
       card_number: '1111111111111111',
       cvv: 789,
       expiry_date: '01/18',
     },
-    // invalid card
+    // Invalid card
     {
       card_number: '4111111111111234',
       cvv: 123,
@@ -55,8 +55,7 @@ export class FormComponent {
       destination_user_id: userId,
       value: transferValue
     }).subscribe((data) => {
-      console.log(data)
-      // mockup logic
+      // Mockup logic
       const validCard = '1111111111111111'
       if (card_number === validCard) {
         this.setStatus.emit({
