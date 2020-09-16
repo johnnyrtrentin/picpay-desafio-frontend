@@ -14,9 +14,12 @@ export class ModalComponent {
 
   formVisible: boolean = true
   alertStatus: object
+  loading: boolean = false
 
   toggleForm($event) {
     this.formVisible = $event
+    console.log('oi, nenis')
+    this.loading = false
   }
 
   setStatus($event) {
@@ -26,6 +29,10 @@ export class ModalComponent {
   closeModal() {
     this.toggleModal.emit(false)
     this.toggleForm(true)
+  }
+
+  setLoading($event) {
+    this.loading = $event
   }
 
 }

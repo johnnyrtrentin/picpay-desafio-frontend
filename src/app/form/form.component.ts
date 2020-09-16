@@ -13,6 +13,7 @@ export class FormComponent {
   @Input() userId: number
   @Output() toggleForm = new EventEmitter<boolean>()
   @Output() setStatus = new EventEmitter<object>()
+  @Output() setLoading = new EventEmitter<boolean>()
 
   currencyMask = {
     align: "left",
@@ -48,6 +49,8 @@ export class FormComponent {
       card.card_number.slice(-4) === selectedCard
     ))
 
+    this.setLoading.emit(true)
+
     this.http.post('https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989', {
       card_number: card_number,
       cvv: cvv,
@@ -62,14 +65,14 @@ export class FormComponent {
           success: true,
           message: 'O pagamento foi concluído com sucesso!'
         })
-        this.toggleForm.emit(false)
       } else {
         this.setStatus.emit({
           success: false,
           message: 'O pagamento não foi concluído com sucesso.'
         })
-        this.toggleForm.emit(false)
       }
+
+      this.toggleForm.emit(false)
     })
   }
 

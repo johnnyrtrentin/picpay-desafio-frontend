@@ -6,7 +6,7 @@
     </button>
     <div class="modal__body">
 
-      <div class="modal__form" *ngIf="formVisible">
+      <div class="modal__form" *ngIf="formVisible" [ngClass]="{'modal__form--hidden': loading}">
         <div class="modal__user">
           <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
           <p class="modal__user-name">{{ selectedUser?.username }}</p>
@@ -15,10 +15,13 @@
           [userId]="selectedUser?.id"
           (toggleForm)="toggleForm($event)"
           (setStatus)="setStatus($event)"
+          (setLoading)="setLoading($event)"
         ></app-form>
       </div>
 
-      <div class="modal__status" *ngIf="!formVisible">
+      <app-loader *ngIf="loading"></app-loader>
+
+      <div class="modal__status" *ngIf="!formVisible && !loading">
         <div class="modal__image" [ngClass]="{'modal__image--failure': !alertStatus.success}"></div>
         <p class="modal__message "[ngClass]="{'modal__message--failure': !alertStatus.success}">{{ alertStatus.message }}</p>
       </div>

@@ -22,14 +22,17 @@
 
   &__content {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 90%;
+    min-height: 265px;
     background-color: white;
     border: 1px solid $silver;
     border-radius: 15px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
 
     @include breakpoint(tablet) {
-      width: 500px;
+      width: 400px;
     }
   }
 
@@ -71,7 +74,14 @@
   }
 
   &__body {
+    width: 100%;
     padding: 20px;
+  }
+
+  &__form {
+    &--hidden {
+      display: none;
+    }
   }
 
   &__user {
