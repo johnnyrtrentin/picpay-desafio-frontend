@@ -18,7 +18,6 @@ export class ModalComponent {
 
   toggleForm($event) {
     this.formVisible = $event
-    console.log('oi, nenis')
     this.loading = false
   }
 
