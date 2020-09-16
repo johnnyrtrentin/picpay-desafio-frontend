@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { NgForm } from '@angular/forms'
 
@@ -7,9 +7,12 @@ import { NgForm } from '@angular/forms'
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
+
 export class FormComponent {
 
   @Input() userId: number
+  @Output() toggleForm = new EventEmitter<boolean>()
+  @Output() setStatus = new EventEmitter<object>()
 
   currencyMask = {
     align: "left",
@@ -38,7 +41,7 @@ export class FormComponent {
 
   mainCard: string = this.cards[0].card_number.slice(-4)
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   makePayment({ userId, transferValue, selectedCard }) {
     const { card_number, cvv, expiry_date } = this.cards.find(card => (
@@ -56,9 +59,17 @@ export class FormComponent {
       // mockup logic
       const validCard = '1111111111111111'
       if (card_number === validCard) {
-        console.log('Sucesso')
+        this.setStatus.emit({
+          success: true,
+          message: 'O pagamento foi concluído com sucesso!'
+        })
+        this.toggleForm.emit(false)
       } else {
-        console.log('Falha')
+        this.setStatus.emit({
+          success: false,
+          message: 'O pagamento não foi concluído com sucesso.'
+        })
+        this.toggleForm.emit(false)
       }
     })
   }

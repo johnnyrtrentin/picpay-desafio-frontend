@@ -15,23 +15,5 @@
   [isVisible]="modalVisible"
   (toggleModal)="toggleModal($event)"
   [selectedUser]="selectedUser"
+  (toggleAlert)="toggleAlert($event)"
 ></app-modal>
-
-<!-- Success and failure alerts -->
-<app-alert>
-  <div image>
-    <app-success></app-success>
-  </div>
-  <div message>
-    O pagamento foi concluído com sucesso!
-  </div>
-</app-alert>
-
-<app-alert [failure]="true">
-  <div image>
-    <app-failure></app-failure>
-  </div>
-  <div message>
-    O pagamento não foi concluído com sucesso.
-  </div>
-</app-alert>

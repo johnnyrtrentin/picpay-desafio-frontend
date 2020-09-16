@@ -33,23 +33,15 @@
     }
   }
 
-  &__header {
-    position: relative;
-    margin: 0 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid $platinum;
-  }
-
   &__close {
     position: absolute;
-    top: 50%;
-    right: 0;
+    top: 20px;
+    right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
     border: 0;
-    transform: translateY(-50%);
   }
 
   &__icon {
@@ -57,7 +49,7 @@
     display: block;
     width: 15px;
     height: 2px;
-    background-color: $picpay-primary;
+    background-color: $dusty-gray;
     transform: rotate(45deg);
 
     &::after {
@@ -66,7 +58,7 @@
       content: '';
       width: 15px;
       height: 2px;
-      background-color: $picpay-primary;
+      background-color: $dusty-gray;
       transform: rotate(90deg);
     }
   }
@@ -99,5 +91,38 @@
     font-family: $titleFont;
     font-size: 1.6rem;
     font-weight: 600;
+  }
+
+  &__status {
+    padding: 10px 0;
+  }
+
+  &__image {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    background-image: url('/assets/images/success.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    &--failure {
+      width: 150px;
+      height: 100px;
+      background-image: url('/assets/images/failure.svg');
+    }
+  }
+
+  &__message {
+    margin-top: 10px;
+    color: $picpay-primary;
+    font-family: $titleFont;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+
+    &--failure {
+      color: $radical-red;
+    }
   }
 }

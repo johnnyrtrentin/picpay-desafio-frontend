@@ -1,20 +1,28 @@
 <div class="modal" role="dialog" tabindex="-1" *ngIf="isVisible">
-  <div class="modal__mask" (click)="this.toggleModal.emit(false)"></div>
+  <div class="modal__mask" (click)="closeModal()"></div>
   <div class="modal__content">
-    <div class="modal__header">
-      <button class="modal__close" (click)="this.toggleModal.emit(false)">
-        <span class="modal__icon"></span>
-      </button>
-      <h3 class="modal__title">
-        Pagar
-      </h3>
-    </div>
+    <button class="modal__close" (click)="closeModal()">
+      <span class="modal__icon"></span>
+    </button>
     <div class="modal__body">
-      <div class="modal__user">
-        <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
-        <p class="modal__user-name">{{ selectedUser?.username }}</p>
+
+      <div class="modal__form" *ngIf="formVisible">
+        <div class="modal__user">
+          <img class="modal__user-image" [src]="selectedUser?.img" [alt]="selectedUser?.name" />
+          <p class="modal__user-name">{{ selectedUser?.username }}</p>
+        </div>
+        <app-form
+          [userId]="selectedUser?.id"
+          (toggleForm)="toggleForm($event)"
+          (setStatus)="setStatus($event)"
+        ></app-form>
       </div>
-      <app-form [userId]="selectedUser?.id"></app-form>
+
+      <div class="modal__status" *ngIf="!formVisible">
+        <div class="modal__image" [ngClass]="{'modal__image--failure': !alertStatus.success}"></div>
+        <p class="modal__message "[ngClass]="{'modal__message--failure': !alertStatus.success}">{{ alertStatus.message }}</p>
+      </div>
+
     </div>
   </div>
 </div>

@@ -51,6 +51,10 @@
     width: 50px;
     height: 50px;
     background-color: $picpay-primary;
+    background-image: url('/assets/images/pay.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
     border: 0;
     border-radius: 50px;
     transform: translateY(-50%);

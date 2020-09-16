@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http'
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
+
 export class ListComponent {
 
   users: {}
@@ -26,8 +27,8 @@ export class ListComponent {
     this.selectedUser = user
   }
 
-  toggleModal() {
-    this.modalVisible = !this.modalVisible
+  toggleModal($event) {
+    this.modalVisible = $event
   }
 
 }

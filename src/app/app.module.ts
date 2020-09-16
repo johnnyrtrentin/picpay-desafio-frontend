@@ -10,13 +10,7 @@ import { SharedModule } from './shared/shared.module'
 import { ListComponent } from './list/list.component'
 import { UserComponent } from './user/user.component'
 import { ModalComponent } from './modal/modal.component';
-import { AlertComponent } from './alert/alert.component';
 import { FormComponent } from './form/form.component';
-
-// Icons
-import { PayComponent } from './icons/pay/pay.component'
-import { SuccessComponent } from './icons/success/success.component'
-import { FailureComponent } from './icons/failure/failure.component'
 
 // Pipes
 import { CardPipe } from './card.pipe';
@@ -26,11 +20,7 @@ import { CardPipe } from './card.pipe';
     AppComponent,
     ListComponent,
     UserComponent,
-    PayComponent,
     ModalComponent,
-    AlertComponent,
-    SuccessComponent,
-    FailureComponent,
     CardPipe,
     FormComponent
    ],
@@ -44,4 +34,4 @@ import { CardPipe } from './card.pipe';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
