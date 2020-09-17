@@ -13,7 +13,7 @@ export class ModalPaymentComponent {
     user: User;
     cards: Card[];
     paymentForm: FormGroup;
-    validation_messages = {
+    validationMessages = {
         value: [
             { type: 'required', message: 'A inserção de valor é obrigatória.' },
             { type: 'pattern', message: 'Digite um e-mail válido.' },

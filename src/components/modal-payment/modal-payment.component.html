@@ -1,9 +1,13 @@
 <div class="modal-backdrop" id="modal-payment">
     <div class="modal">
-        <div class="title">
-            Pagamento para <span>{{ user.name }}</span>
+        <div class="header">
+            <img src="../assets/images/close.svg" (click)="closeModal()" />
         </div>
+
         <form class="content" [formGroup]="paymentForm" (ngSubmit)="sendPayment()">
+            <img src="{{ user.img }}" />
+            <p class="user-username">{{ user.username }}</p>
+            <p class="title">Realizar pagamento para {{ user.name }}</p>
             <input currencyMask placeholder="R$ 0,00" formControlName="value" name="value" />
             <div class="cards">
                 <select>

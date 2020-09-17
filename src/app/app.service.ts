@@ -30,8 +30,7 @@ export class AppService {
     openModal(user: User) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.data = user;
-        dialogConfig.disableClose = true;
-        dialogConfig.id = 'modal-component';
+        dialogConfig.hasBackdrop = true;
         this.matDialog.open(ModalPaymentComponent, dialogConfig);
     }
 

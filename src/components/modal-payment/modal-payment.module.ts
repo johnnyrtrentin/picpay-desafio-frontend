@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
-import { AppComponent } from './app.component';
 import { ModalPaymentComponent } from 'src/components/modal-payment/modal-payment.component';
 import { ModalPaymentStatusComponent } from 'src/components/modal-payment-status/modal-payment-status.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,17 +9,8 @@ import { MatBadgeModule, MatDialogModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
-export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-    align: 'right',
-    allowNegative: true,
-    decimal: ',',
-    precision: 2,
-    prefix: 'R$ ',
-    suffix: '',
-    thousands: '.',
-};
 @NgModule({
-    declarations: [AppComponent, ModalPaymentComponent, ModalPaymentStatusComponent],
+    declarations: [ModalPaymentComponent, ModalPaymentStatusComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -30,13 +20,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         MatDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
-        AngularSvgIconModule.forRoot(),
+        AngularSvgIconModule.forRoot() 
     ],
-    providers: [
-        { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
-        HttpClient,
-    ],
-    bootstrap: [AppComponent],
-    entryComponents: [ModalPaymentComponent],
+    providers: [HttpClient],
+    bootstrap: [ModalPaymentComponent],
+    entryComponents: [ModalPaymentStatusComponent],
 })
-export class AppModule {}
+export class ModalPaymentModule {}

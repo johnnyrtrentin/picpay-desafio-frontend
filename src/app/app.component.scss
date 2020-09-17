@@ -1,5 +1,5 @@
 .content-list {
-  margin-top: -40px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,7 +18,7 @@
   border-radius: 10px;
   padding: 30px 10px;
   align-items: center;
-  min-width: 60%;
+  min-width: 100%;
 }
 
 .users>.pay-button {
@@ -98,8 +98,10 @@
 
 @media(min-width: 700px) {
   .users {
+    min-width: 60%;
     padding: 40px 60px;
   }
+
   .user {
     display: flex;
     align-items: center;

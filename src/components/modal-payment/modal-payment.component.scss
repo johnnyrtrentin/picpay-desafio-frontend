@@ -1,82 +1,128 @@
-
-/* Payment Modal */
 .modal-backdrop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  
-    position: fixed;
-    top: 0;
-    left: 0;
-  
-    height: 100vh;
-    width: 100vw;
-  }
-  
-  .modal-backdrop.hidden {
-    display: none;
-  }
-  
-  .modal-backdrop:after {
-    content: "";
-  
-    background: rgba(0, 0, 0, 0.5);
-  
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content>img {
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  border: 3px solid #20bc5b;
+}
+
+.modal-backdrop.hidden {
+  display: none;
+}
+
+.modal-backdrop:after {
+  content: "";
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.modal {
+  background: #fff;
+  margin: 80px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  margin: -24px;
+}
+
+.title {
+  color: #20bc5b;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.user-username {
+  color: #1D3D29;
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.modal>.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal>.header>img {
+  width: 50px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modal>.content {
+  padding: 32px;
+  text-align: center;
+}
+
+.modal>.content>input {
+  border-radius: 0.5rem;
+  border: 1px solid #F1F1F1;
+  background: #F1F1F1;
+  font: 1.2rem Archivo;
+  height: 3rem;
+  margin-top: 0.8rem;
+  outline: 0;
+  padding: 0 0.8rem;
+  width: 100%;
+}
+
+.modal>.content>.cards>select {
+  border-radius: 0.5rem;
+  border: 1px solid #F1F1F1;
+  background: #F1F1F1;
+  font: 1.2rem Archivo;
+  height: 3rem;
+  margin-top: 0.8rem;
+  outline: 0;
+  padding: 0 0.8rem;
+  width: 100%;
+}
+
+.modal>.content>button {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 32px;
+  height: 48px;
+  padding: 0 8px;
+  margin-top: 24px;
+}
+
+.modal>.content>button {
+  height: 2.5rem;
+  width: 100%;
+  background: #20bc5b;
+  color: #F1F1F1;
+  border: 0;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font: 700 1.6rem Archivo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2;
+  margin-top: 3.2rem
+}
+
+@media(min-width: 700px) {
   .modal {
-    background: #fff;
     margin: 32px 0;
     width: 420px;
+    border-radius: 15px;
+    height: auto;
   }
-  
-  .modal > .title {
-    background: #474971;
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 16px 24px;
-  }
-  
-  .modal > .title > span {
-    color: #cddc39;
-  }
-  
-  .modal > .content {
-    padding: 32px;
-    text-align: center;
-  }
-  
-  .modal > .content > input {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 32px;
-    height: 48px;
-    padding: 0 8px;
-  }
-  
-  .modal > .content > .cards > select {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 32px;
-    height: 48px;
-    margin-top: 12px;
-  }
-  
-  .modal > .content > button {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 32px;
-    height: 48px;
-    padding: 0 8px;
-    margin-top: 24px;
-  }
-  
+}
