@@ -1,17 +1,18 @@
 <div class="modal-backdrop" id="modal-payment">
     <div class="modal">
-        <div class="title">Pagamento para <span>Nome do Usuário</span></div>
-
-        <div class="content">
-            <input type="number" placeholder="R$ 0,00" />
+        <div class="title">
+            Pagamento para <span>{{ user.name }}</span>
+        </div>
+        <form class="content"  [formGroup]="paymentForm" (ngSubmit)="sendPayment()">
+            <input type="number" placeholder="R$ 0,00" formControlName="value" name="value" />
 
             <div class="cards">
                 <select>
-                    <option selected>Cartão com final 0123</option>
+                    <option selected>Selecione um cartão</option>
+                    <option *ngFor="let card of cards" value="{{ card.card_number }}">{{ card.card_number }}</option>
                 </select>
             </div>
-
-            <button type="button" class="pay-button">Pagar</button>
-        </div>
+            <button type="submit" class="pay-button">Pagar</button>
+        </form>
     </div>
 </div>

@@ -7,9 +7,17 @@ import { ModalPaymentStatusComponent } from 'src/components/modal-payment-status
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule, MatDialogModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
     declarations: [AppComponent, ModalPaymentComponent, ModalPaymentStatusComponent],
-    imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, MatBadgeModule, MatDialogModule],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatBadgeModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
     entryComponents: [ModalPaymentComponent, ModalPaymentStatusComponent],

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { User } from '../models/user';
+import { User } from '../models';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalPaymentComponent } from 'src/components/modal-payment/modal-payment.component';
 
@@ -29,7 +29,7 @@ export class AppService {
 
     openModal(user: User) {
         const dialogConfig = new MatDialogConfig();
-        dialogConfig.data = user
+        dialogConfig.data = user;
         dialogConfig.disableClose = true;
         dialogConfig.id = 'modal-component';
         this.matDialog.open(ModalPaymentComponent, dialogConfig);
