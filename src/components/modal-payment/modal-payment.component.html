@@ -3,9 +3,8 @@
         <div class="title">
             Pagamento para <span>{{ user.name }}</span>
         </div>
-        <form class="content"  [formGroup]="paymentForm" (ngSubmit)="sendPayment()">
-            <input type="number" placeholder="R$ 0,00" formControlName="value" name="value" />
-
+        <form class="content" [formGroup]="paymentForm" (ngSubmit)="sendPayment()">
+            <input currencyMask placeholder="R$ 0,00" formControlName="value" name="value" />
             <div class="cards">
                 <select>
                     <option selected>Selecione um cartão</option>
