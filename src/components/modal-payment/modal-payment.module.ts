@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule, MatDialogModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
     declarations: [ModalPaymentComponent, ModalPaymentStatusComponent],
@@ -20,7 +19,6 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         MatDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
-        AngularSvgIconModule.forRoot() 
     ],
     providers: [HttpClient],
     bootstrap: [ModalPaymentComponent],

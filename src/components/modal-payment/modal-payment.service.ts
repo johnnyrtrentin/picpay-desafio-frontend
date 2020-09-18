@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { User } from '../models';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ModalPaymentComponent } from 'src/components/modal-payment/modal-payment.component';
+import { Card, User } from 'src/models';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AppService {
+export class ModalPaymentService {
     environmentUrl = 'Debug api';
 
-    constructor(private httpClient: HttpClient, public matDialog: MatDialog) {}
+    constructor(private httpClient: HttpClient) {}
 
     httpOptions = {
         headers: new HttpHeaders({
@@ -21,17 +19,26 @@ export class AppService {
         }),
     };
 
-    getUsers() {
+    sendPayment(
+        user: User,
+        value: {
+            value: string;
+            card: Card;
+        }
+    ) {
         return this.httpClient
-            .get<User[]>(`https://www.mocky.io/v2/5d531c4f2e0000620081ddce`, this.httpOptions)
-            .pipe(retry(2), catchError(this.handleError));
-    }
-
-    openModal(user: User) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.data = user;
-        dialogConfig.panelClass = 'border-15'
-        this.matDialog.open(ModalPaymentComponent, dialogConfig);
+            .post(
+                `https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989`,
+                {
+                    card_number: value.card.card_number,
+                    cvv: value.card.cvv,
+                    expiry_date: value.card.expiry_date,
+                    destination_user_id: user.id,
+                    value: value.value,
+                },
+                this.httpOptions
+            )
+            .pipe(retry(1), catchError(this.handleError));
     }
 
     handleError(error: HttpErrorResponse) {

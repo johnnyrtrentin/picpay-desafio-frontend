@@ -1,21 +1,43 @@
-<div class="modal-backdrop" id="modal-payment">
-    <div class="modal">
-        <div class="header">
-            <img src="../assets/images/close.svg" (click)="closeModal()" />
-        </div>
-
-        <form class="content" [formGroup]="paymentForm" (ngSubmit)="sendPayment()">
-            <img src="{{ user.img }}" />
-            <p class="user-username">{{ user.username }}</p>
-            <p class="title">Realizar pagamento para {{ user.name }}</p>
-            <input currencyMask placeholder="R$ 0,00" formControlName="value" name="value" />
-            <div class="cards">
-                <select>
-                    <option selected>Selecione um cartão</option>
-                    <option *ngFor="let card of cards" value="{{ card.card_number }}">{{ card.card_number }}</option>
-                </select>
+<div id="modal-payment">
+    <div class="modal-backdrop">
+        <div class="modal">
+            <div class="header">
+                <img src="../assets/images/close.svg" (click)="closeModal()" />
             </div>
-            <button type="submit" class="pay-button">Pagar</button>
-        </form>
+
+            <form class="content" [formGroup]="paymentForm" (ngSubmit)="sendPayment(user)">
+                <img src="{{ user.img }}" />
+                <p class="user-username">{{ user.username }}</p>
+                <p class="title">Realizar pagamento para {{ user.name }}</p>
+                <div class="money">
+                    <label>Valor:</label>
+                    <input currencyMask placeholder="R$ 0,00" formControlName="value" name="value" />
+                    <div class="error-container" *ngFor="let validation of validationMessages.value">
+                        <div
+                            *ngIf="
+                                paymentForm.get('value').hasError(validation.type) &&
+                                (paymentForm.get('value').dirty || paymentForm.get('value').touched)
+                            "
+                        >
+                            <span>{{ validation.message }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards">
+                    <label>Selecione um cartão:</label>
+                    <select formControlName="card">
+                        <option selected value="">Selecione</option>
+                        <option *ngFor="let card of cards" [ngValue]="card">Cartão com final {{ card.final }}</option>
+                    </select>
+                    <div class="error-container" *ngFor="let validation of validationMessages.card">
+                        <div *ngIf="paymentForm.get('card').hasError(validation.type)">
+                            <span>{{ validation.message }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="pay-button" [disabled]="!paymentForm.valid">Pagar</button>
+            </form>
+        </div>
     </div>
 </div>

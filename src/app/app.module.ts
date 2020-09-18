@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule, MatDialogModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AngularSvgIconModule } from 'angular-svg-icon';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: 'right',
@@ -30,7 +29,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         MatDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
-        AngularSvgIconModule.forRoot(),
     ],
     providers: [
         { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
