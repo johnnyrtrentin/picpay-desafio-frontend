@@ -4,12 +4,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User, Card } from 'src/models';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ModalPaymentService } from './modal-payment.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-modal-payment',
     templateUrl: './modal-payment.component.html',
     styleUrls: ['./modal-payment.component.scss'],
-    providers: [ModalPaymentService],
+    providers: [ModalPaymentService, HttpClient],
 })
 export class ModalPaymentComponent {
     user: User;
@@ -20,7 +21,7 @@ export class ModalPaymentComponent {
         card: [{ type: 'required', message: 'O cartão é obrigatório.' }],
     };
     status: string;
-    isSubmitted: boolean = false;
+    isSubmitted = false;
     constructor(
         public dialogRef: MatDialogRef<ModalPaymentComponent>,
         @Inject(MAT_DIALOG_DATA) public data: User,
@@ -55,17 +56,18 @@ export class ModalPaymentComponent {
         ];
         let previousCard = [];
         this.cards.map((card: Card) => {
-            previousCard.push({
-                ...card,
-                final: card.card_number.slice(card.card_number.length - 4, card.card_number.length),
-            });
+            previousCard = [
+                ...previousCard,
+                { ...card, final: card.card_number.slice(card.card_number.length - 4, card.card_number.length) },
+            ];
         });
         this.cards = previousCard;
     }
 
     sendPayment(user: User) {
+        console.log(user.id)
         this.isSubmitted = true;
-        this.modalPaymentService.sendPayment(user, this.paymentForm.value).subscribe(
+        this.modalPaymentService.sendPayment(user.id, this.paymentForm.value).subscribe(
             (res: { status: string; success: string }) => {
                 if (res.success) {
                     this.isSubmitted = false;

@@ -6,6 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./spinner.component.scss'],
 })
 export class SpinnerComponent {
-    @Input() diameter: number = 40;
+    @Input() diameter = 40;
     constructor() {}
 }

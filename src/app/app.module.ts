@@ -4,7 +4,7 @@ import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng
 import { AppComponent } from './app.component';
 import { ModalPaymentComponent } from 'src/components/modal-payment/modal-payment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
@@ -22,17 +22,17 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 @NgModule({
     declarations: [AppComponent, ModalPaymentComponent, SpinnerComponent, HeaderComponent],
     imports: [
+        HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         MatProgressSpinnerModule,
-        HttpClientModule,
         MatBadgeModule,
         MatDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
     ],
-    providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, HttpClient],
+    providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
     bootstrap: [AppComponent],
     entryComponents: [ModalPaymentComponent],
 })

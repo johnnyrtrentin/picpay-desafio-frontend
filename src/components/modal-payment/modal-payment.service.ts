@@ -22,7 +22,7 @@ export class ModalPaymentService {
 
 
     sendPayment(
-        user: User,
+        userId: number,
         value: {
             value: string;
             card: Card;
@@ -35,7 +35,7 @@ export class ModalPaymentService {
                     card_number: value.card.card_number,
                     cvv: value.card.cvv,
                     expiry_date: value.card.expiry_date,
-                    destination_user_id: user.id,
+                    destination_user_id: userId,
                     value: value.value,
                 },
                 this.httpOptions

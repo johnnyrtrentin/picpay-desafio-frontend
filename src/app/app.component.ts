@@ -11,7 +11,7 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
     title = 'Desafio Picpay Front-end';
     users: User[];
-    load: boolean = false;
+    load = false;
 
     constructor(private appService: AppService) {}
 
@@ -20,10 +20,10 @@ export class AppComponent implements OnInit {
     }
 
     getUsers() {
-        this.load = true
+        this.load = true;
         this.appService.getUsers().subscribe((ResponseUsers: User[]) => {
             this.users = ResponseUsers;
-            this.load = false
+            this.load = false;
         });
     }
 
