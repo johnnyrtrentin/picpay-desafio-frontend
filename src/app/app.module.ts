@@ -29,10 +29,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         ReactiveFormsModule,
         CurrencyMaskModule,
     ],
-    providers: [
-        { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
-        HttpClient,
-    ],
+    providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, HttpClient],
     bootstrap: [AppComponent],
     entryComponents: [ModalPaymentComponent],
 })
