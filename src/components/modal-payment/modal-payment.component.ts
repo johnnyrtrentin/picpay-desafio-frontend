@@ -65,7 +65,6 @@ export class ModalPaymentComponent {
     }
 
     sendPayment(user: User) {
-        console.log(user.id)
         this.isSubmitted = true;
         this.modalPaymentService.sendPayment(user.id, this.paymentForm.value).subscribe(
             (res: { status: string; success: string }) => {

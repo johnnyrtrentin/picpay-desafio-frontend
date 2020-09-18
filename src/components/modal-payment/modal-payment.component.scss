@@ -1,19 +1,12 @@
 .modal-backdrop {
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 100vh;
   justify-content: center;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
-  height: 100vh;
   width: 100vw;
-}
-
-.content>img {
-  border-radius: 50%;
-  height: 120px;
-  width: 120px;
-  border: 3px solid #20bc5b;
 }
 
 .modal-backdrop.hidden {
@@ -23,31 +16,39 @@
 .modal-backdrop:after {
   content: "";
   background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 100%;
   z-index: -1;
 }
 
+.content>img {
+  border: 3px solid #20bc5b;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+}
+
+
 .modal {
   background: #fff;
+  border-radius: 0px;
+  height: 100%;
   margin: 100px 0px 0px 0px;
   width: 100%;
-  height: 100%;
-  border-radius: 0px;
 }
 
 .title {
   color: #20bc5b;
-  font-weight: 500;
   font-size: 16px;
+  font-weight: 500;
 }
 
 h1 {
-  font: 500 2rem Archivo;
   color: #1D3D29;
+  font: 500 2rem Archivo;
   text-align: center;
 }
 
@@ -65,7 +66,7 @@ label {
   margin-top: 0.2rem;
 }
 
-.user-username {
+.username {
   color: #1D3D29;
   font-weight: 300;
   font-size: 0.8rem;
@@ -81,9 +82,9 @@ label {
 }
 
 .modal>.header>img {
-  width: 50px;
-  padding: 10px;
   cursor: pointer;
+  padding: 10px;
+  width: 50px;
 }
 
 .modal>.content {
@@ -116,21 +117,21 @@ label {
 }
 
 button {
-  height: 2.5rem;
-  width: 100%;
+  align-items: center;
   background: #20bc5b;
-  color: #F1F1F1;
   border: 0;
   border-radius: 0.8rem;
+  color: #F1F1F1;
   cursor: pointer;
-  font: 700 1.6rem Archivo;
   display: flex;
-  align-items: center;
+  font: 700 1.6rem Archivo;
+  height: 2.5rem;
   justify-content: center;
-  text-decoration: none;
-  outline: 0;
-  transition: background-color 0.2;
   margin-top: 3.2rem;
+  outline: 0;
+  text-decoration: none;
+  transition: background-color 0.2;
+  width: 100%;
 
   &:hover {
     background: #00823B;
@@ -148,9 +149,9 @@ button {
 
 @media(min-width: 700px) {
   .modal {
-    width: 420px;
-    min-height: 300px;
     border-radius: 15px;
+    min-height: 300px;
     height: auto;
+    width: 420px;
   }
 }
