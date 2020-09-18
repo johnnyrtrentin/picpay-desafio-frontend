@@ -28,13 +28,18 @@
                     <option *ngFor="let card of cards" [ngValue]="card">Cartão com final {{ card.final }}</option>
                 </select>
                 <div class="error-container" *ngFor="let validation of validationMessages.card">
-                    <div *ngIf="paymentForm.get('card').hasError(validation.type)">
+                    <div
+                        *ngIf="
+                            paymentForm.get('card').hasError(validation.type) &&
+                            (paymentForm.get('card').dirty || paymentForm.get('card').touched)
+                        "
+                    >
                         <span>{{ validation.message }}</span>
                     </div>
                 </div>
             </div>
             <button type="submit" [disabled]="!paymentForm.valid">
-                <app-spinner *ngIf="isSubmitted" diameter="20"></app-spinner> {{isSubmitted ? 'Pagando' : 'Pagar'}}
+                <app-spinner *ngIf="isSubmitted" diameter="20"></app-spinner> {{ isSubmitted ? 'Pagando' : 'Pagar' }}
             </button>
         </form>
         <div *ngIf="status" class="display-status">

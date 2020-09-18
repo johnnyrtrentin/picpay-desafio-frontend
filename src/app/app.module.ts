@@ -5,14 +5,14 @@ import { AppComponent } from './app.component';
 import { ModalPaymentComponent } from 'src/components/modal-payment/modal-payment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatBadgeModule, MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatDialogModule, MatProgressSpinnerModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../components/spinner/spinner.component';
 import { HeaderComponent } from '../components/header/header.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: 'right',
-    allowNegative: true,
+    allowNegative: false,
     decimal: ',',
     precision: 2,
     prefix: 'R$ ',
@@ -27,7 +27,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
         BrowserAnimationsModule,
         FormsModule,
         MatProgressSpinnerModule,
-        MatBadgeModule,
         MatDialogModule,
         ReactiveFormsModule,
         CurrencyMaskModule,
