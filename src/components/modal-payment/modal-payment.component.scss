@@ -129,7 +129,16 @@ label {
   justify-content: center;
   text-decoration: none;
   transition: background-color 0.2;
-  margin-top: 3.2rem
+  margin-top: 3.2rem;
+
+  &:hover {
+    background: #00823B;
+  }
+
+  &:disabled {
+    background: #43DE88;
+  }
+
 }
 
 @media(min-width: 700px) {
