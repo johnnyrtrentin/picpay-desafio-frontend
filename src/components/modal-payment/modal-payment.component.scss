@@ -46,6 +46,20 @@
   font-size: 16px;
 }
 
+label {
+  color: #1D3D29;
+  float: left;
+  margin: 30px 0px 0px 0px;
+}
+
+.error-container>div>span {
+  color: #B54A09;
+  font-size: 1rem;
+  font-weight: 300;
+  float: left;
+  margin-top: 0.2rem;
+}
+
 .user-username {
   color: #1D3D29;
   font-weight: 300;
@@ -68,13 +82,13 @@
   text-align: center;
 }
 
-.modal>.content>input {
+.modal>.content>.money>input {
   border-radius: 0.5rem;
   border: 1px solid #F1F1F1;
   background: #F1F1F1;
   font: 1.2rem Archivo;
   height: 3rem;
-  margin-top: 0.8rem;
+  margin-top: 0.3rem;
   outline: 0;
   padding: 0 0.8rem;
   width: 100%;
@@ -86,7 +100,7 @@
   background: #F1F1F1;
   font: 1.2rem Archivo;
   height: 3rem;
-  margin-top: 0.8rem;
+  margin-top: 0.3rem;
   outline: 0;
   padding: 0 0.8rem;
   width: 100%;
