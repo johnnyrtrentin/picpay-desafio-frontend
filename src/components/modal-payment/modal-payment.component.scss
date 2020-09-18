@@ -46,6 +46,12 @@
   font-size: 16px;
 }
 
+h1 {
+  font: 500 2rem Archivo;
+  color: #1D3D29;
+  text-align: center;
+}
+
 label {
   color: #1D3D29;
   float: left;
@@ -69,6 +75,10 @@ label {
 .modal>.header {
   display: flex;
   justify-content: flex-end;
+}
+
+.modal>.display-status {
+  padding: 0px 20px;
 }
 
 .modal>.header>img {
@@ -106,16 +116,7 @@ label {
   width: 100%;
 }
 
-.modal>.content>button {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 32px;
-  height: 48px;
-  padding: 0 8px;
-  margin-top: 24px;
-}
-
-.modal>.content>button {
+button {
   height: 2.5rem;
   width: 100%;
   background: #20bc5b;
@@ -128,6 +129,7 @@ label {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  outline: 0;
   transition: background-color 0.2;
   margin-top: 3.2rem;
 
@@ -145,6 +147,7 @@ label {
   .modal {
     margin: 32px 0;
     width: 420px;
+    min-height: 300px;
     border-radius: 15px;
     height: auto;
   }

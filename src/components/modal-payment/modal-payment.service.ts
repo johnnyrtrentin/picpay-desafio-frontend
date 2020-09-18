@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Card, User } from 'src/models';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Injectable({
     providedIn: 'root',
@@ -10,7 +11,7 @@ import { Card, User } from 'src/models';
 export class ModalPaymentService {
     environmentUrl = 'Debug api';
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, public matDialog: MatDialog) {}
 
     httpOptions = {
         headers: new HttpHeaders({
@@ -18,6 +19,7 @@ export class ModalPaymentService {
             'Access-Control-Allow-Origin': '*',
         }),
     };
+
 
     sendPayment(
         user: User,

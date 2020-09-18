@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { AppComponent } from './app.component';
 import { ModalPaymentComponent } from 'src/components/modal-payment/modal-payment.component';
-import { ModalPaymentStatusComponent } from 'src/components/modal-payment-status/modal-payment-status.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule, MatDialogModule } from '@angular/material';
@@ -19,7 +18,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     thousands: '.',
 };
 @NgModule({
-    declarations: [AppComponent, ModalPaymentComponent, ModalPaymentStatusComponent],
+    declarations: [AppComponent, ModalPaymentComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

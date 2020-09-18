@@ -19,6 +19,7 @@ export class ModalPaymentComponent {
         value: [{ type: 'required', message: 'A inserção de valor é obrigatória.' }],
         card: [{ type: 'required', message: 'O cartão é obrigatório.' }],
     };
+    status: string;
 
     constructor(
         public dialogRef: MatDialogRef<ModalPaymentComponent>,
@@ -68,12 +69,11 @@ export class ModalPaymentComponent {
             .subscribe((res: { status: string; success: string }) => {
                 if (res.success) {
                     if (res.status === 'Aprovada' && this.paymentForm.value.card.card_number === '1111111111111111') {
-                        console.log('foi');
+                        this.status = res.status;
                     } else {
-                        console.log('n foi');
+                        this.status = 'Reprovada';
                     }
                 }
-                this.closeModal();
             });
     }
 

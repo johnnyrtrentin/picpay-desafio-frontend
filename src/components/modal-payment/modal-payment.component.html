@@ -4,8 +4,7 @@
             <div class="header">
                 <img src="../assets/images/close.svg" (click)="closeModal()" />
             </div>
-
-            <form class="content" [formGroup]="paymentForm" (ngSubmit)="sendPayment(user)">
+            <form class="content" *ngIf="!status" [formGroup]="paymentForm" (ngSubmit)="sendPayment(user)">
                 <img src="{{ user.img }}" />
                 <p class="user-username">{{ user.username }}</p>
                 <p class="title">Realizar pagamento para {{ user.name }}</p>
@@ -36,8 +35,17 @@
                     </div>
                 </div>
 
-                <button type="submit" class="pay-button" [disabled]="!paymentForm.valid">Pagar</button>
+                <button type="submit" [disabled]="!paymentForm.valid">Pagar</button>
             </form>
+            <div *ngIf="status" class="display-status">
+                <div *ngIf="status === 'Aprovada'">
+                    <h1>Transação concluída com sucesso!</h1>
+                </div>
+                <div *ngIf="status !== 'Aprovada'">
+                    <h1>Infelizmente algo deu errado na sua transação, tente novamente mais tarde!</h1>
+                </div>
+                <button type="button" (click)="closeModal()">Tudo bem!</button>
+            </div>
         </div>
     </div>
 </div>

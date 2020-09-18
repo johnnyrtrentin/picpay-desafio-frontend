@@ -24,13 +24,13 @@ export class AppService {
     getUsers() {
         return this.httpClient
             .get<User[]>(`https://www.mocky.io/v2/5d531c4f2e0000620081ddce`, this.httpOptions)
-            .pipe(retry(2), catchError(this.handleError));
+            .pipe(retry(1), catchError(this.handleError));
     }
 
     openModal(user: User) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.data = user;
-        dialogConfig.panelClass = 'border-15'
+        dialogConfig.id = 'modal-payment';
         this.matDialog.open(ModalPaymentComponent, dialogConfig);
     }
 
