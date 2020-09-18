@@ -7,9 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule, MatDialogModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @NgModule({
-    declarations: [ModalPaymentComponent],
+    declarations: [ModalPaymentComponent, SpinnerComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

@@ -20,7 +20,7 @@ export class ModalPaymentComponent {
         card: [{ type: 'required', message: 'O cartão é obrigatório.' }],
     };
     status: string;
-
+    isSubmitted: boolean = false;
     constructor(
         public dialogRef: MatDialogRef<ModalPaymentComponent>,
         @Inject(MAT_DIALOG_DATA) public data: User,
@@ -64,17 +64,24 @@ export class ModalPaymentComponent {
     }
 
     sendPayment(user: User) {
-        this.modalPaymentService
-            .sendPayment(user, this.paymentForm.value)
-            .subscribe((res: { status: string; success: string }) => {
+        this.isSubmitted = true;
+        this.modalPaymentService.sendPayment(user, this.paymentForm.value).subscribe(
+            (res: { status: string; success: string }) => {
                 if (res.success) {
+                    this.isSubmitted = false;
                     if (res.status === 'Aprovada' && this.paymentForm.value.card.card_number === '1111111111111111') {
                         this.status = res.status;
                     } else {
                         this.status = 'Reprovada';
                     }
+                } else {
+                    this.isSubmitted = false;
                 }
-            });
+            },
+            () => {
+                this.isSubmitted = false;
+            }
+        );
     }
 
     closeModal() {

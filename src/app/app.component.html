@@ -1,10 +1,6 @@
-<header class="page-header">
-    <div class="header-content">
-        <strong>Quer realizar um pagamento? </strong>
-        <p>Vem com a gente que é bem fácil!</p>
-    </div>
-</header>
-<div class="content-list">
+<app-header></app-header>
+<app-spinner *ngIf="load"></app-spinner>
+<div class="content-list" *ngIf="!load && users.length > 0">
     <div class="users" *ngFor="let user of users">
         <div class="user">
             <img src="{{ user.img }}" />
@@ -13,6 +9,6 @@
                 <div class="user-username">{{ user.username }}</div>
             </div>
         </div>
-        <button type="button" (click)="openModal(user)">Pagar</button>
+        <button type="button" (click)="openModal(user)">Pagar </button>
     </div>
 </div>

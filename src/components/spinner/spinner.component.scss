@@ -1,0 +1,11 @@
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #1D3D29;
+}
+
+.content-spinner {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

@@ -33,8 +33,9 @@
                     </div>
                 </div>
             </div>
-
-            <button type="submit" [disabled]="!paymentForm.valid">Pagar</button>
+            <button type="submit" [disabled]="!paymentForm.valid">
+                <app-spinner *ngIf="isSubmitted" diameter="20"></app-spinner> {{isSubmitted ? 'Pagando' : 'Pagar'}}
+            </button>
         </form>
         <div *ngIf="status" class="display-status">
             <div *ngIf="status === 'Aprovada'">
