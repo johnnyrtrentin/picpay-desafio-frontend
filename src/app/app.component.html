@@ -1,14 +1,16 @@
 <app-header title="Quer realizar um pagamento?" subtitle="Vem com a gente que é bem fácil!"></app-header>
-<app-spinner *ngIf="load"></app-spinner>
-<div class="content-list" *ngIf="!load && users.length > 0">
-    <div class="users" *ngFor="let user of users">
-        <div class="user">
-            <img src="{{ user.img }}" />
-            <div class="info-wrapper">
-                <div class="user-name">{{ user.id }} - {{ user.name }}</div>
-                <div class="user-username">{{ user.username }}</div>
+<main>
+    <app-spinner *ngIf="load"></app-spinner>
+    <div class="content-list" *ngIf="!load && users.length > 0">
+        <div class="users" *ngFor="let user of users">
+            <div class="user">
+                <img src="{{ user.img }}" />
+                <div class="info-wrapper">
+                    <div class="user-name">{{ user.id }} - {{ user.name }}</div>
+                    <div class="username">{{ user.username }}</div>
+                </div>
             </div>
+            <button type="button" (click)="openModal(user)">Pagar</button>
         </div>
-        <button type="button" (click)="openModal(user)">Pagar </button>
     </div>
-</div>
+</main>
