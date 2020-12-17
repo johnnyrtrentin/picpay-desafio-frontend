@@ -1,0 +1,9 @@
+<div *ngFor="let user of users">
+  <mat-card matRipple [matRippleCentered]="true" class="user" (click)="selectUser(user)">
+    <mat-card-header>
+      <div mat-card-avatar [style.background-image]="'url(' + user.img + ')'" class="avatar"></div>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>{{ user.id }} - {{ user.username }}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</div>

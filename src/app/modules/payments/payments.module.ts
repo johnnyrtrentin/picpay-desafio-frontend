@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { PaymentsComponent } from './payments.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
-    PaymentsComponent
+    PaymentsComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
