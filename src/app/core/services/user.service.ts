@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 
 import { User } from '@core/model/user';
 
@@ -15,6 +15,12 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(BASE_API_URL).pipe(take(1));
+    return this.http.get<User[]>(BASE_API_URL)
+    .pipe(
+      take(1),
+      catchError(error => {
+        return throwError(error);
+      })
+    );
   }
 }
