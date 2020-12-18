@@ -14,7 +14,7 @@ import { UserListComponent } from './user-list/user-list.component';
   imports: [
     CommonModule,
     PaymentsRoutingModule,
-    SharedModule,
+    SharedModule
   ]
 })
 export class PaymentsModule { }

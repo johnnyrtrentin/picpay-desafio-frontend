@@ -1,17 +1,45 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatRippleModule, MatToolbarModule } from '@angular/material';
+import { NgxCurrencyModule } from "ngx-currency";
+import { MatButtonModule, 
+  MatCardModule, 
+  MatDialogModule, 
+  MatFormFieldModule, 
+  MatIconModule, 
+  MatInputModule, 
+  MatMenuModule, 
+  MatProgressSpinnerModule, 
+  MatRippleModule, 
+  MatSelectModule, 
+  MatSnackBarModule, 
+  MatToolbarModule } from '@angular/material';
+
+import { PaymentFormComponent } from './components/payment-form/payment-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PaymentFormComponent
+  ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    NgxCurrencyModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
+  ],
+  entryComponents: [
+    PaymentFormComponent
   ],
   exports: [
     MatToolbarModule,
@@ -19,7 +47,15 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatRipple
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+
+    PaymentFormComponent
   ]
 })
 export class SharedModule { }

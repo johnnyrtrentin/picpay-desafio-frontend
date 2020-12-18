@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Realizar pagamento</h1>
+<mat-dialog-content [formGroup]="paymentForm">
+  <p>Vocês está pagando <b>{{ data.user.name }}</b></p>
+  
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>Valor</mat-label>
+    <input matInput required formControlName="value" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"/>
+    <mat-error *ngIf="paymentForm.controls.value.touched && paymentForm.controls.value.invalid">
+      <span *ngIf="paymentForm.controls.value.errors.required">Campo obrigatório.</span>
+      <span *ngIf="paymentForm.controls.value.errors.min">Valor não pode ser igual a 0.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>Cartão de Crédito</mat-label>
+    <mat-select  required formControlName="creditCard">
+      <mat-option *ngFor="let card of data.creditCards" [value]="card">
+        Cartão com o final {{card.card_number | slice:-4}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="paymentForm.controls.creditCard.invalid">
+      <span *ngIf="paymentForm.controls.creditCard.errors.required">Campo obrigatório.</span>
+    </mat-error>
+  </mat-form-field>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="submit()">Pagar</button>
+</mat-dialog-actions>
