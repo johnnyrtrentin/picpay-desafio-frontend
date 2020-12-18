@@ -12,6 +12,7 @@ export class UserListComponent implements OnInit {
 
   @Output() select = new EventEmitter<User>();
   users: User[];
+  loading: boolean;
 
   constructor(private userService: UserService) { }
 
@@ -20,10 +21,13 @@ export class UserListComponent implements OnInit {
   }
 
   onLoadUsers() {
+    this.loading = true;
     this.userService.getUsers().subscribe((data: User[]) => {
       this.users = data;
-      console.log(this.users);
-    })
+      this.loading = false;
+    }, () => {
+      this.loading = false; 
+    });
   }
 
   selectUser(user: User) {
