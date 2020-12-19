@@ -42,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PaymentFormComponent
   ],
   exports: [
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
