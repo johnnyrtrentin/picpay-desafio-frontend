@@ -4,8 +4,6 @@ import { MatDialog } from '@angular/material';
 import { catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { PaymentForm } from '@shared/components/payment-form/payment-form';
-import { PaymentFormComponent } from '@shared/components/payment-form/payment-form.component';
 import { PaymentTransaction} from './payment-transaction'
 
 export const BASE_API_URL = 'https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989';
@@ -19,12 +17,6 @@ export class PaymentsService {
     private http: HttpClient,
     public dialog: MatDialog)
   {}
-
-  openPaymentForm(paymentForm: PaymentForm) {
-    return this.dialog.open(PaymentFormComponent, {
-      data: paymentForm
-    });
-  }
 
   pay(paymentTransaction: PaymentTransaction) {
     return this.http.post(BASE_API_URL, paymentTransaction)

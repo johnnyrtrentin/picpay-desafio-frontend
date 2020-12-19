@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { User } from '@core/model/user';
 import { CreditCardService } from '@core/services/credit-card.service';
 import { PaymentForm } from '@shared/components/payment-form/payment-form';
-import { PaymentData } from './shared/payment-data';
-import { PaymentsService } from './shared/payments.service';
+import { PaymentFormComponent } from '@shared/components/payment-form/payment-form.component';
 
 @Component({
   selector: 'app-payments',
@@ -17,53 +16,17 @@ export class PaymentsComponent {
   loading: boolean;
 
   constructor(
-    private paymentsService: PaymentsService,
-    private creditCardService: CreditCardService,
-    private snackBar: MatSnackBar
+    public dialog: MatDialog,
+    private creditCardService: CreditCardService
     ) { }
 
   openPaymentForm(user: User) {
+    const creditCards = this.creditCardService.getCards();
     const paymentForm: PaymentForm = {
       user,
-      creditCards: this.creditCardService.getCards()
+      creditCards
     }
 
-    this.paymentsService.openPaymentForm(paymentForm)
-      .afterClosed()
-      .subscribe((data: PaymentData) => {
-        if (!data) {
-          return;
-        }
-
-        this.loading = true;
-        
-        const paymentTransaction: PaymentTransaction = {
-          card_number: data.creditCard.card_number,
-          cvv: data.creditCard.cvv,
-          expiry_date: data.creditCard.expiry_date,
-          destination_user_id: data.user.id,
-          value: data.value
-        };
-
-        this.paymentsService.pay(paymentTransaction).subscribe(() => {
-          const message = paymentTransaction.card_number === '1111111111111111' 
-            ? 'O pagamento foi concluído com sucesso'
-            : 'O pagamento não foi concluído com sucesso';
-          
-          this.showMessage(message);
-          this.loading = false;
-        }, () => {
-          this.showMessage('Ocorreu um erro inesperado');
-          this.loading = false;
-        });
-    });
-  }
-
-  private showMessage(message: string) {
-    this.snackBar.open(message, 'Ok', {
-      duration: 5000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top'
-    });
+    this.dialog.open(PaymentFormComponent, {data: paymentForm});
   }
 }
