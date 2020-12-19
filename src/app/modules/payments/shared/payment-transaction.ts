@@ -1,4 +1,4 @@
-interface PaymentTransaction {
+export interface PaymentTransaction {
   card_number: string;
   cvv: number;
   expiry_date: string;
