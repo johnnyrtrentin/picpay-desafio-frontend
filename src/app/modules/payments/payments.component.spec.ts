@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 import { PaymentsComponent } from './payments.component';
 import { SharedModule } from '@shared/shared.module';
 import { UserListComponent } from './user-list/user-list.component';
-import { PaymentsService } from './shared/payments.service';
 import { User } from '@core/model/user';
 import { CreditCard } from '@core/model/credit-card';
 import { PaymentForm } from '@shared/components/payment-form/payment-form';
@@ -24,8 +23,25 @@ export class MatDialogMock {
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
   let fixture: ComponentFixture<PaymentsComponent>;
-  let paymentsService: PaymentsService;
   let creditCardService: CreditCardService;
+
+  const user: User = {
+    id: 1,
+    name: 'string',
+    img: 'string',
+    username: 'string'
+  };
+
+  const creditCard: CreditCard = {
+    card_number: '1111111111111111',
+    cvv: 789,
+    expiry_date: '01/18',
+  }
+
+  const paymentForm: PaymentForm = {
+    user,
+    creditCards: [creditCard]
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -50,7 +66,6 @@ describe('PaymentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PaymentsComponent);
     component = fixture.componentInstance;
-    paymentsService = TestBed.get(PaymentsService);
     creditCardService = TestBed.get(CreditCardService);
     fixture.detectChanges();
   });
@@ -60,24 +75,6 @@ describe('PaymentsComponent', () => {
   });
 
   it('should open payment form', () => {
-    const user: User = {
-      id: 1,
-      name: 'string',
-      img: 'string',
-      username: 'string'
-    };
-
-    const creditCard: CreditCard = {
-      card_number: '1111111111111111',
-      cvv: 789,
-      expiry_date: '01/18',
-    }
-
-    const paymentForm: PaymentForm = {
-      user,
-      creditCards: [creditCard]
-    }
-    
     const spyDialog = spyOn(component.dialog, 'open').and.callThrough();
     spyOn(creditCardService, 'getCards').and.returnValue([creditCard]);
 

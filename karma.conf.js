@@ -18,7 +18,13 @@ module.exports = function (config) {
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/picpay-desafio-frontend'),
       reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true
+      fixWebpackSourcePaths: true,
+      thresholds: {
+        statements: 85,
+        branches: 85,
+        functions: 85,
+        lines: 85
+      }
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
