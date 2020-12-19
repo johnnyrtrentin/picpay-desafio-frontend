@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxCurrencyModule } from "ngx-currency";
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, 
   MatCardModule, 
   MatDialogModule, 
@@ -15,7 +16,6 @@ import { MatButtonModule,
   MatToolbarModule } from '@angular/material';
 
 import { PaymentFormComponent } from './components/payment-form/payment-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
