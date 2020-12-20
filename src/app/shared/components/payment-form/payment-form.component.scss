@@ -1,3 +1,8 @@
 .form-field {
-  display: block
+  display: block;
+  margin-top: 20px;
+
+  .error {
+    color: #f44336;
+  }
 }

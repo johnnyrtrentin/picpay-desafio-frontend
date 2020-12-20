@@ -10,7 +10,11 @@
       <mat-error *ngIf="paymentForm.controls.value.touched && paymentForm.controls.value.invalid">
         <span *ngIf="paymentForm.controls.value.errors.required">Campo obrigatório.</span>
         <span *ngIf="paymentForm.controls.value.errors.min">Valor não pode ser igual a 0.</span>
+        <span *ngIf="paymentForm.controls.value.errors.invalidBalance">Saldo insuficiente.</span>
       </mat-error>
+      <mat-hint>
+        <span class="error" *ngIf="paymentForm.controls.value.errors?.invalidBalance">Saldo insuficiente.</span>
+      </mat-hint>
     </mat-form-field>
   
     <mat-form-field class="form-field" appearance="outline">

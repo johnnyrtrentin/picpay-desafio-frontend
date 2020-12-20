@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 
 import { PaymentForm } from './payment-form';
 import { PaymentsService } from 'src/app/modules/payments/shared/payments.service';
+import { AccountService } from '@core/services/account.service';
+import { CreditCardService } from '@core/services/credit-card.service';
 
 @Component({
   selector: 'app-payment-form',
@@ -14,22 +16,32 @@ export class PaymentFormComponent implements OnInit {
 
   paymentForm: FormGroup;
   loading: boolean;
+  balance: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<PaymentFormComponent>,
     private paymentsService: PaymentsService,
+    private creditCardService: CreditCardService,
+    private accountService: AccountService,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: PaymentForm
   ) {}
 
   ngOnInit() {
+    this.getBalance();
     this.buildForm();
+  }
+
+  getBalance() {
+    this.accountService.balance$.subscribe((value: number) => {
+      this.balance = value;      
+    });
   }
 
   buildForm() {
     this.paymentForm = this.formBuilder.group({
-      value: [null, [Validators.required, Validators.min(1)]],
+      value: [null, [Validators.required, Validators.min(0.01), valueValidator(this.balance)]],
       creditCard: [null, Validators.required]
     });
   }
@@ -52,9 +64,12 @@ export class PaymentFormComponent implements OnInit {
 
     this.paymentsService.pay(paymentTransaction).subscribe(() => {
       let message: string;
-      if (paymentTransaction.card_number === '1111111111111111') {
-        this.dialogRef.close();
+      const validCard = this.creditCardService.checkCreditCard(paymentTransaction.card_number);
+
+      if (validCard) {
         message = 'O pagamento foi concluído com sucesso';
+        this.dialogRef.close();
+        this.accountService.updateBalance(paymentTransaction.value);
       } else {
         this.loading = false;
         message = 'O pagamento não foi concluído com sucesso';
@@ -75,4 +90,11 @@ export class PaymentFormComponent implements OnInit {
       verticalPosition: 'top'
     });
   }
+}
+
+export function valueValidator(balance: number): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const valueBalance = control.value > balance;
+    return valueBalance ? {invalidBalance: {value: control.value}} : null;
+  };
 }
