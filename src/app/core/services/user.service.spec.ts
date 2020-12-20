@@ -12,13 +12,13 @@ describe('UserService', () => {
   let service: UserService;
   let httpTestingController: HttpTestingController;
   
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule
-    ]
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ]
+    });
+
     service = TestBed.get(UserService);
     httpTestingController = TestBed.get(HttpTestingController);
   });

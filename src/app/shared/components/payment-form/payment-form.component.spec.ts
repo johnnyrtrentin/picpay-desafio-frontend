@@ -43,24 +43,22 @@ describe('PaymentFormComponent', () => {
     username: 'string'
   };
 
-  const creditCard: CreditCard = {
+  const creditCardValid: CreditCard = {
     card_number: '1111111111111111',
     cvv: 789,
     expiry_date: '01/18',
   }
 
-  const paymentForm: PaymentForm = {
-    user,
-    creditCards: [creditCard]
+  const creditCardInvalid: CreditCard = {
+    card_number: '4111111111111234',
+    cvv: 123,
+    expiry_date: '01/20',
   }
 
-  const paymentTransaction: PaymentTransaction = {
-    card_number: creditCard.card_number,
-    cvv: creditCard.cvv,
-    expiry_date: creditCard.expiry_date,
-    destination_user_id: user.id,
-    value: 100
-  };
+  const paymentForm: PaymentForm = {
+    user,
+    creditCards: [creditCardValid, creditCardInvalid]
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -150,15 +148,22 @@ describe('PaymentFormComponent', () => {
     expect(errors['required']).toBeFalsy();
   });
 
-  it('should send payment', () => {  
+  it('should send payment', () => {
     const spyPaymentService = spyOn(paymentService, 'pay').and.returnValue(of({}));
     const spyDialog = spyOn(dialogRef, 'close');
     const spyShowMessage = spyOn<any>(component, 'showMessage').and.callThrough();
     const spySnackBar = spyOn(snackBar, 'open');
     const message = 'O pagamento foi concluído com sucesso';
+    const paymentTransaction: PaymentTransaction = {
+      card_number: creditCardValid.card_number,
+      cvv: creditCardValid.cvv,
+      expiry_date: creditCardValid.expiry_date,
+      destination_user_id: user.id,
+      value: 100
+    };
 
     component.paymentForm.controls['value'].setValue(100);
-    component.paymentForm.controls['creditCard'].setValue(creditCard);
+    component.paymentForm.controls['creditCard'].setValue(creditCardValid);
 
     component.submit();
 
@@ -168,19 +173,19 @@ describe('PaymentFormComponent', () => {
     expect(spySnackBar).toHaveBeenCalled();
   });
 
-  it('should recuse payment', () => {  
+  it('should recuse payment', () => {
     const spyPaymentService = spyOn(paymentService, 'pay').and.returnValue(of({}));
     const spyShowMessage = spyOn<any>(component, 'showMessage').and.callThrough();
     const spySnackBar = spyOn(snackBar, 'open');
     const message = 'O pagamento não foi concluído com sucesso';
+    const paymentTransaction: PaymentTransaction = {
+      card_number: creditCardInvalid.card_number,
+      cvv: creditCardInvalid.cvv,
+      expiry_date: creditCardInvalid.expiry_date,
+      destination_user_id: user.id,
+      value: 100
+    };
 
-    const creditCardInvalid: CreditCard = {
-      card_number: '4111111111111234',
-      cvv: 789,
-      expiry_date: '01/18',
-    }
-
-    paymentTransaction.card_number = creditCardInvalid.card_number;
     component.paymentForm.controls['value'].setValue(100);
     component.paymentForm.controls['creditCard'].setValue(creditCardInvalid);
 
@@ -197,7 +202,7 @@ describe('PaymentFormComponent', () => {
     const spyShowMessage = spyOn<any>(component, 'showMessage');
 
     component.paymentForm.controls['value'].setValue(100);
-    component.paymentForm.controls['creditCard'].setValue(creditCard);
+    component.paymentForm.controls['creditCard'].setValue(creditCardValid);
     component.submit();
 
     expect(spyPaymentService).toHaveBeenCalled();

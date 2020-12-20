@@ -19,14 +19,14 @@ describe('PaymentsService', () => {
     value: 1
   };
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      MatDialogModule
-    ]
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule
+      ]
+    });
+
     service = TestBed.get(PaymentsService);
     httpTestingController = TestBed.get(HttpTestingController);
   });
