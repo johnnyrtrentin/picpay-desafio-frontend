@@ -8,6 +8,7 @@ import { MatButtonModule,
   MatFormFieldModule, 
   MatIconModule, 
   MatInputModule, 
+  MatListModule, 
   MatMenuModule, 
   MatProgressSpinnerModule, 
   MatRippleModule, 
@@ -36,7 +37,8 @@ import { PaymentFormComponent } from './components/payment-form/payment-form.com
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule
   ],
   entryComponents: [
     PaymentFormComponent
@@ -55,6 +57,7 @@ import { PaymentFormComponent } from './components/payment-form/payment-form.com
     MatSelectModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatListModule,
 
     PaymentFormComponent
   ]
