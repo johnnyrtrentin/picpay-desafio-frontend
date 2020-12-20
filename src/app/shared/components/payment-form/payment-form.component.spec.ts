@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
+import { NgxCurrencyModule } from 'ngx-currency';
 import { 
   MatDialogModule, 
   MatDialogRef, 
@@ -17,17 +18,17 @@ import {
 
 import { CreditCard } from '@core/model/credit-card';
 import { User } from '@core/model/user';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { AccountService } from '@core/services/account.service';
 import { PaymentTransaction } from 'src/app/modules/payments/shared/payment-transaction';
 import { PaymentsService } from 'src/app/modules/payments/shared/payments.service';
 import { PaymentForm } from './payment-form';
-
 import { PaymentFormComponent } from './payment-form.component';
 
 describe('PaymentFormComponent', () => {
   let component: PaymentFormComponent;
   let fixture: ComponentFixture<PaymentFormComponent>;
   let paymentService: PaymentsService;
+  let accountService: AccountService;
   let dialogRef: MatDialogRef<PaymentFormComponent>;
   let snackBar: MatSnackBar;
 
@@ -95,6 +96,7 @@ describe('PaymentFormComponent', () => {
     fixture = TestBed.createComponent(PaymentFormComponent);
     component = fixture.componentInstance;
     paymentService = TestBed.get(PaymentsService);
+    accountService = TestBed.get(AccountService);
     dialogRef = TestBed.get(MatDialogRef);
     snackBar = TestBed.get(MatSnackBar)
     fixture.detectChanges();
@@ -148,8 +150,24 @@ describe('PaymentFormComponent', () => {
     expect(errors['required']).toBeFalsy();
   });
 
+  it('should validate balance', () => {
+    let errors = {};
+    let value = component.paymentForm.controls['value'];
+
+    value.setValue(2000);
+    errors = value.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['invalidBalance']).toBeTruthy();
+
+    value.setValue(1000);
+    errors = value.errors || {};
+    expect(errors['required']).toBeFalsy();
+    expect(errors['invalidBalance']).toBeFalsy();
+  });
+
   it('should send payment', () => {
     const spyPaymentService = spyOn(paymentService, 'pay').and.returnValue(of({}));
+    const spyAccountService = spyOn(accountService, 'updateBalance').and.callThrough();
     const spyDialog = spyOn(dialogRef, 'close');
     const spyShowMessage = spyOn<any>(component, 'showMessage').and.callThrough();
     const spySnackBar = spyOn(snackBar, 'open');
@@ -169,6 +187,7 @@ describe('PaymentFormComponent', () => {
 
     expect(spyDialog).toHaveBeenCalled();
     expect(spyPaymentService).toHaveBeenCalledWith(paymentTransaction);
+    expect(spyAccountService).toHaveBeenCalledWith(100);
     expect(spyShowMessage).toHaveBeenCalledWith(message);
     expect(spySnackBar).toHaveBeenCalled();
   });
