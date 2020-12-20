@@ -6,11 +6,9 @@ import { of } from 'rxjs';
 import { PaymentsComponent } from './payments.component';
 import { SharedModule } from '@shared/shared.module';
 import { UserListComponent } from './user-list/user-list.component';
-import { User } from '@core/model/user';
-import { CreditCard } from '@core/model/credit-card';
-import { PaymentForm } from '@shared/components/payment-form/payment-form';
-import { CreditCardService } from '@core/services/credit-card.service';
-import { PaymentFormComponent } from '@shared/components/payment-form/payment-form.component';
+import { User, CreditCard } from '@core/model';
+import { CreditCardService } from '@core/services';
+import { PaymentForm, PaymentFormComponent } from '@shared/components';
 
 export class MatDialogMock {
   open() {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
-import { User } from '@core/model/user';
+import { User } from '@core/model';
 
 export const BASE_API_URL = 'https://www.mocky.io/v2/5d531c4f2e0000620081ddce';
 

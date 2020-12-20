@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { User } from '@core/model/user';
-import { CreditCardService } from '@core/services/credit-card.service';
-import { PaymentForm } from '@shared/components/payment-form/payment-form';
-import { PaymentFormComponent } from '@shared/components/payment-form/payment-form.component';
+import { User } from '@core/model';
+import { CreditCardService } from '@core/services';
+import { PaymentFormComponent, PaymentForm } from '@shared/components';
 
 @Component({
   selector: 'app-payments',

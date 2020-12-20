@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CreditCard } from '@core/model/credit-card';
+import { CreditCard } from '@core/model';
 
 @Injectable({
   providedIn: 'root'

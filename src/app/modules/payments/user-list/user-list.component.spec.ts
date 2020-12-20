@@ -4,8 +4,8 @@ import { of, throwError } from 'rxjs';
 
 import { UserListComponent } from './user-list.component';
 import { SharedModule } from '@shared/shared.module';
-import { UserService } from '@core/services/user.service';
-import { User } from '@core/model/user';
+import { UserService } from '@core/services';
+import { User } from '@core/model';
 
 describe('UserListComponent', () => {
   let component: UserListComponent;

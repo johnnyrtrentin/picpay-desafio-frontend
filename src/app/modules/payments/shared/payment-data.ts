@@ -1,5 +1,4 @@
-import { CreditCard } from '@core/model/credit-card';
-import { User } from '@core/model/user';
+import { User, CreditCard } from '@core/model';
 
 export interface PaymentData {
   user: User;

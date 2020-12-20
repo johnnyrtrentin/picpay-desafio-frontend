@@ -4,8 +4,7 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 
 import { PaymentForm } from './payment-form';
 import { PaymentsService } from 'src/app/modules/payments/shared/payments.service';
-import { AccountService } from '@core/services/account.service';
-import { CreditCardService } from '@core/services/credit-card.service';
+import { AccountService, CreditCardService } from '@core/services';
 
 @Component({
   selector: 'app-payment-form',

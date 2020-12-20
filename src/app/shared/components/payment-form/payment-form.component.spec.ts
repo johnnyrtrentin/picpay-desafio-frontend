@@ -16,9 +16,8 @@ import {
   MAT_DIALOG_DATA 
 } from '@angular/material';
 
-import { CreditCard } from '@core/model/credit-card';
-import { User } from '@core/model/user';
-import { AccountService } from '@core/services/account.service';
+import { User, CreditCard } from '@core/model';
+import { AccountService } from '@core/services';
 import { PaymentTransaction } from 'src/app/modules/payments/shared/payment-transaction';
 import { PaymentsService } from 'src/app/modules/payments/shared/payments.service';
 import { PaymentForm } from './payment-form';

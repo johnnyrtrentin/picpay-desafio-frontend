@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { User } from '@core/model/user';
-import { throwError } from 'rxjs';
+import { User } from '@core/model';
 
 import { UserService } from './user.service';
 
