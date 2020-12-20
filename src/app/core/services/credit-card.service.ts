@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { CreditCard } from '@core/model/credit-card';
 
 @Injectable({
@@ -23,5 +24,9 @@ export class CreditCardService {
         expiry_date: '01/20',
       },
     ];
+  }
+
+  checkCreditCard(cardNumber: string): boolean {
+    return cardNumber !== '4111111111111234';
   }
 }
