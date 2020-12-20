@@ -6,7 +6,7 @@
       <a mat-button routerLink="/payments">Pagamentos</a>
     </div>
     <span class="menu-spacer"></span>
-    <button mat-button>Saldo: {{ balance | currency: 'BRL':'symbol':'3.2-2':'pt' }}</button>
+    <button mat-button>Saldo: {{ balance | currency: 'BRL':'symbol':'.2-2':'pt' }}</button>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon class="icon" [inline]="true">account_circle</mat-icon>
     </button>
