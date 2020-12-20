@@ -1,6 +1,8 @@
 <div *ngIf="loading" class="loading">
   <mat-spinner></mat-spinner>
 </div>
-<app-user-list *ngIf="!loading"
-  (select)="openPaymentForm($event)">
-</app-user-list>
+<div class="payments">
+  <app-user-list *ngIf="!loading"
+    (select)="openPaymentForm($event)">
+  </app-user-list>
+</div>
