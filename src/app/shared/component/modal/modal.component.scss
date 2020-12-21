@@ -1,3 +1,5 @@
+@import '../../styles/global.scss';
+
 .modal-backdrop {
     display: flex;
     align-items: center;
@@ -10,36 +12,33 @@
   
     height: 100vh;
     width: 100vw;
+  
+    :after {
+        content: "";      
+        background: rgba(0, 0, 0, 0.5);      
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;       
+    }
 }
-  
-.modal-backdrop.hidden {
-    display: none;
-}
-  
-.modal-backdrop:after {
-    content: "";
-  
-    background: rgba(0, 0, 0, 0.5);
-  
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-}
+   
   
 .modal {
     background: #fff;
     margin: 32px 0;
-    // width: 420px;
 
     > .title {
-        background: #474971;
+        background: $primary;
         color: #ffffff;
-        font-weight: 500;
+        font-weight: bold;
+        line-height: 2.5;
         font-size: 16px;
         padding: 16px 24px;
+        text-transform: uppercase;
+        
 
         > span {
             color: #cddc39;
