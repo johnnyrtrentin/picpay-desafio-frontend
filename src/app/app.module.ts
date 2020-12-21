@@ -6,7 +6,7 @@ import { ContentComponent } from './layout/content/content.component';
 import { HeaderComponent } from './layout/header/header.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { UserModule } from './modules/user/user.module';
+import { UsersModule } from './modules/users/users.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    UserModule,
+    UsersModule,
     
   ],
   providers: [],

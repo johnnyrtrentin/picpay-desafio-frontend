@@ -1,0 +1,62 @@
+@import '../../../../shared/styles/global.scss';
+
+.user {
+    width: 800px;
+    background: #fff;
+    box-shadow: 0 1px 0 #ffffff, 0px -1px 0px #ffffff;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border-radius: 5px;
+    color: $primary;
+
+    transition: transform .2s ease-in;
+
+    &:hover {
+        transform: scale(1.05);       
+    }
+
+    > img {
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+    }
+
+    > .info-wrapper {
+        margin-left: 16px;
+        > .user-name {
+            font-size: 18px;
+            font-weight: bold;;
+
+            
+        }
+
+        > .user-id-username{
+            > span {
+                opacity: 0.5;
+                font-size: 16px;
+                font-weight: normal;
+            }
+        }
+    }
+
+    > .pay-button {
+        @extend %button-primary;        
+
+        width: 100px;  
+        justify-content: flex-end;
+
+        margin-left: auto;
+        padding: 20px;
+        border-radius: 90px;
+
+        > i {
+          font-size: 18px;
+          margin-right: 10px;
+        }
+        
+    }
+
+}
+ 

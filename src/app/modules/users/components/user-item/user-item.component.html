@@ -1,0 +1,17 @@
+<div class="user">
+    <img [src]="user.img" />
+    <div class="info-wrapper">
+      <div class="user-name">
+        {{user.name}}
+      </div>
+
+      <div class="user-id-username">
+        <span>{{user.username}}</span>
+        <!-- ID:{{user.id}} -->
+      </div>
+    </div>
+    <button type="button" class="pay-button" (click)="pay(user)">
+      <i class="fas fa-dollar-sign"></i>
+      Pagar
+    </button>
+</div> 

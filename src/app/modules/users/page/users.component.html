@@ -1,0 +1,51 @@
+<div class="users" *ngIf="users | async as users;">
+    <div class="user" *ngFor="let user of users">
+        <app-user-item [user]="user" (payEvent)="payUser($event)"></app-user-item>
+    </div>
+ 
+    <app-modal title="Pagamento para {{transaction.currentUser.name}}" *ngIf="modalEnabled | async">
+        <div class="content" [formGroup]="transaction.form">
+            <div class="value">
+                <label>Valor</label>
+                <input type="text" currencyMask placeholder="R$ 0,00" formControlName="value" />
+            </div>
+
+            <div class="cards">
+                <select name="card" formControlName="card">
+                    <option [ngValue]="null" selected disabled>Selecione um metódo de pagamento</option>
+                    <option *ngFor="let card of cards" [ngValue]="card">
+                        Cartão com final {{card.card_number | slice: -4}}
+                    </option>
+                </select>
+            </div>
+
+            <span class="error" *ngIf="transaction?.message">{{ transaction.message }}</span>
+
+            <div class="footer">
+                <div>
+                    <button type="button" class="pay-button--secondary" (click)="clear()">
+                    Fechar
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="pay-button" (click)="handlePayment()">
+                    Pagar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </app-modal>
+
+    <app-modal title="Recibo de pagamento" *ngIf="transaction.status">
+        <div class="content">
+            <div [innerHtml]="transaction.message">
+
+            </div> 
+            <div class="footer">
+                <button type="button" class="pay-button--secondary" (click)="clear()">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </app-modal>
+</div>
