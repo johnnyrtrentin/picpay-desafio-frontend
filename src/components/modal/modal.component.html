@@ -1,0 +1,55 @@
+  <div class="modal-header">
+    <h5 *ngIf="!isSubmited" class="modal-title" id="modal-basic-title">Pagamento para {{ user.name }}</h5>
+    <h5 *ngIf="isSubmited" class="modal-title" id="modal-basic-title">Recibo de pagamento</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form *ngIf="!isSubmited" [formGroup]="paymentForm" (ngSubmit)="pay(user)" class="form-group w-75">     
+      <div class="mb-2">
+        <input 
+          currencyMask 
+          placeholder="R$ 0,00" 
+          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" 
+          formControlName="value" 
+          [ngClass]="(paymentForm.errors?.invalidValue && (paymentForm.touched || paymentForm.dirty)) ? 'invalid-value' : ''"
+          class="form-control" 
+          name="value" 
+          required />            
+        <div 
+          *ngIf="paymentForm.errors?.invalidValue && (paymentForm.touched || paymentForm.dirty)" 
+          class="error-message mb-0">
+          {{ paymentForm.errors?.errorMessage }}
+        </div>
+      </div>
+      <div class="cards mb-4">  
+        <select 
+          formControlName="selectedCard" 
+          [ngClass]="(paymentForm.errors?.invalidValue && (paymentForm.touched || paymentForm.dirty)) ? 'invalid-value' : ''" 
+          class="form-control" 
+          name="selectedCard">
+          <option selected value="">Selecione</option>          
+          <option *ngFor="let card of cards" [ngValue]="card">Cartão com final {{ card.final }}</option>
+        </select>
+        <div 
+          *ngIf="paymentForm.errors?.invalidSelectedCard && (paymentForm.touched || paymentForm.dirty)"
+          class="error-message mb-0">
+          {{ paymentForm.errors?.errorMessage }}
+        </div>      
+      </div>         
+      <button type="submit" class="btn btn-success w-100">Pagar</button>      
+    </form>
+    <div *ngIf="loading" class="loading mb-4 mt-4">Carregando...</div>
+    <div *ngIf="isSubmited && !loading" class="modal-status w-75">
+      <div class="modal-status-message" *ngIf="isApproved">
+          <i-bs name="check-circle" width="2rem" height="2rem"></i-bs>
+          <h4>O pagamento foi concluído com sucesso!</h4>
+      </div>
+      <div class="modal-status-message" *ngIf="!isApproved">
+          <p>Ops!</p>
+          <h4>Falha ao realizar pagamento!</h4>
+      </div>
+      <button type="button" class="btn btn-success w-100" (click)="closeModal()">Ok</button>
+    </div>     
+  </div>
