@@ -8,14 +8,8 @@ import { Response } from "src/models/response";
 import { ModalService } from "./modal.service";
 
 export const formValidation: ValidatorFn = (control: FormGroup): ValidationErrors | null => {    
-  const value = control.get('value');
-  const selectedCard = control.get('selectedCard');
-
-  const invalidValue = (value.value === '' || parseFloat(value.value) === 0.0) && 
-    (value.touched || value.dirty);
-    
-  const invalidSelectedCard = selectedCard.value === '' &&
-    (selectedCard.touched || selectedCard.dirty);      
+  const invalidValue = control.get('value').value === '' || parseFloat(control.get('value').value) === 0.0;    
+  const invalidSelectedCard = control.get('selectedCard').value === '';      
   
   const errorMessage = 'Campo obrigatório.';
 

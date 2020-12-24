@@ -13,12 +13,12 @@
           placeholder="R$ 0,00" 
           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" 
           formControlName="value" 
-          [ngClass]="(!isValidForm && paymentForm.errors?.invalidValue) ? 'invalid-value' : ''"
+          [ngClass]="(!isValidForm && paymentForm.errors?.invalidValue) && (paymentForm.touched || paymentForm.dirty) ? 'invalid-value' : ''"
           class="form-control" 
           name="value" 
           required />            
         <div 
-          *ngIf="!isValidForm && paymentForm.errors?.invalidValue" 
+          *ngIf="!isValidForm && paymentForm.errors?.invalidValue && (paymentForm.touched || paymentForm.dirty)" 
           class="error-message mb-0">
           {{ paymentForm.errors?.errorMessage }}
         </div>
@@ -26,14 +26,14 @@
       <div class="cards mb-4">  
         <select 
           formControlName="selectedCard" 
-          [ngClass]="(!isValidForm && paymentForm.errors?.invalidSelectedCard) ? 'invalid-value' : ''" 
+          [ngClass]="(!isValidForm && paymentForm.errors?.invalidSelectedCard) && (paymentForm.touched || paymentForm.dirty) ? 'invalid-value' : ''" 
           class="form-control" 
           name="selectedCard">
           <option selected value="">Selecione</option>          
           <option *ngFor="let card of cards" [ngValue]="card">Cartão com final {{ card.final }}</option>
         </select>
         <div 
-          *ngIf="!isValidForm && paymentForm.errors?.invalidSelectedCard"
+          *ngIf="!isValidForm && paymentForm.errors?.invalidSelectedCard && (paymentForm.touched || paymentForm.dirty)"
           class="error-message mb-0">
           {{ paymentForm.errors?.errorMessage }}
         </div>      

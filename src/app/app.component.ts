@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { User } from 'src/models/user';
 import { UserService } from './users/user/user.service';
 

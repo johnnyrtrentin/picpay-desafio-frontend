@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { UsersModule } from 'src/app/users/users.module';
+import { HeaderModule } from './shared/components/header/header.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { UsersModule } from 'src/app/users/users.module';
   ],
   imports: [
     BrowserModule,
-    UsersModule
+    UsersModule,
+    HeaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
