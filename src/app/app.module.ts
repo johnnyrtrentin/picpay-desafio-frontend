@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { UsersModule } from 'src/components/users/users.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalModule } from 'src/components/modal/modal.module';
-import { CommonModule } from '@angular/common';
+
+import { UsersModule } from 'src/app/users/users.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +10,7 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     BrowserModule,
-    UsersModule,
-    BrowserAnimationsModule,
-    CommonModule
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

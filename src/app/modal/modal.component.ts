@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { Component } from "@angular/core";
+import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Card } from "src/models/card";
@@ -7,14 +7,20 @@ import { User } from "src/models/user";
 import { Response } from "src/models/response";
 import { ModalService } from "./modal.service";
 
-export const formValidation: ValidatorFn = (control: FormGroup): ValidationErrors 
-  | null => {
-    const invalidValue = control.get('value').value === '' || parseFloat(control.get('value').value) === 0.0;
-    const invalidSelectedCard = control.get('selectedCard').value === '';        
-    const errorMessage = 'Campo obrigatório.';
+export const formValidation: ValidatorFn = (control: FormGroup): ValidationErrors | null => {    
+  const value = control.get('value');
+  const selectedCard = control.get('selectedCard');
 
-    return invalidValue || invalidSelectedCard ? { invalidValue, invalidSelectedCard, errorMessage } : null
-  };
+  const invalidValue = (value.value === '' || parseFloat(value.value) === 0.0) && 
+    (value.touched || value.dirty);
+    
+  const invalidSelectedCard = selectedCard.value === '' &&
+    (selectedCard.touched || selectedCard.dirty);      
+  
+  const errorMessage = 'Campo obrigatório.';
+
+  return invalidValue || invalidSelectedCard ? { invalidValue, invalidSelectedCard, errorMessage } : null
+};
 
 @Component({
   selector: 'app-modal',
@@ -24,12 +30,11 @@ export const formValidation: ValidatorFn = (control: FormGroup): ValidationError
 export class ModalComponent {  
   user: User;
   cards: Card[];
-  paymentForm: FormGroup;
+  paymentForm: FormGroup;  
   loading: boolean = false;
+  isValidForm: boolean = true;
   isApproved: boolean = false;
   isSubmited: boolean = false;
-  
-  @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -48,20 +53,11 @@ export class ModalComponent {
   }
 
   getCards() {
-    this.cards = [
-        {
-            card_number: '1111111111111111',
-            cvv: 789,
-            expiry_date: '01/18',
-        },
-        {
-            card_number: '4111111111111234',
-            cvv: 123,
-            expiry_date: '01/20',
-        },
-    ];
     let previousCard = [];
-    this.cards.map((card: Card) => {
+
+    this.modalService
+    .getCards()    
+    .map((card: Card) => {
         previousCard = [
             ...previousCard,
             { 
@@ -73,13 +69,15 @@ export class ModalComponent {
     return this.cards = previousCard;
   }
 
-  pay(user: User){
+  pay(user: User){        
     if (this.paymentForm.errors) {
+      this.isValidForm = false;
       Object.keys(this.paymentForm.controls).forEach(key => {
         this.paymentForm.controls[key].markAsTouched()
       });
       return
-    }
+    } 
+    this.isValidForm = true;
     this.setPayment(user, this.paymentForm)
   }
 

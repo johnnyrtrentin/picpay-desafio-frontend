@@ -8,7 +8,6 @@ export class ModalService {
   constructor(private http: HttpClient) {}
 
   pay(userId: number, value: { value: string; selectedCard: Card; } ) {
-    console.log(value.selectedCard);
     return this.http
       .post(
           'https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989',
@@ -20,5 +19,20 @@ export class ModalService {
               value: value.value,
           }
       );
+  }
+
+  getCards(): Card[] {
+    return [      
+      {
+        card_number: '1111111111111111',
+        cvv: 789,
+        expiry_date: '01/18',
+      },      
+      {
+        card_number: '4111111111111234',
+        cvv: 123,
+        expiry_date: '01/20',
+      },
+    ];
   }
 }
