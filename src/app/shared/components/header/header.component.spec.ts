@@ -1,9 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -12,4 +15,14 @@ describe('HeaderComponent', () => {
       imports: [HttpClientModule], 
     }).compileComponents();
   }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create header', () => {
+    expect(component).toBeTruthy();
+  });
 });
