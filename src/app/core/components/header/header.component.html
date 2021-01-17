@@ -1,42 +1,51 @@
-<mat-toolbar color="primary" class="header">
-  <mat-toolbar-row>
-    
-    <span>EasyPay</span>
-    <span class="header__icons"></span>
+<header>
+  <mat-toolbar color="primary" class="header">
+    <mat-toolbar-row>
+      
+      <span>EasyPay</span>
 
-    <button
-      mat-icon-button
-      matBadge="7"
-      matBadgeColor="warn"
-      matBadgeOverlap="true"
-      matBadgeSize="small"
-      class="header__icons--padding"
-      aria-hidden="false"
-      aria-label="Credit Card Icon">
-        <mat-icon>payment</mat-icon>
+      <nav class="header__links">
+        <a mat-button routerLink="dashboard">Início</a>
+        <a mat-button routerLink="user-payment">Pagamentos</a>
+        <a mat-button routerLink="register-card">Registar novo Cartão</a>
+      </nav>
+
+      <span class="header__icons"></span>
+
+      <button
+        mat-icon-button
+        matBadge="7"
+        matBadgeColor="warn"
+        matBadgeOverlap="true"
+        matBadgeSize="small"
+        class="header__icons--padding"
+        aria-hidden="false"
+        aria-label="Credit Card Icon">
+          <mat-icon>payment</mat-icon>
+      </button>
+
+      <button mat-icon-button
+        [matMenuTriggerFor]="accountMenu"
+        class="header__icons--padding"
+        aria-hidden="false"
+        aria-label="Account Icon">
+          <mat-icon>account_circle</mat-icon>
+      </button>
+
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-menu #accountMenu="matMenu">
+
+    <button mat-menu-item>
+      <mat-icon aria-hidden="false" aria-label="Settings Icon">settings</mat-icon>
+      Gerenciar Conta
     </button>
 
-    <button mat-icon-button
-      [matMenuTriggerFor]="accountMenu"
-      class="header__icons--padding"
-      aria-hidden="false"
-      aria-label="Account Icon">
-        <mat-icon>account_circle</mat-icon>
+    <button mat-menu-item>
+      <mat-icon aria-hidden="false" aria-label="Exit Icont">exit_to_app</mat-icon>
+      Sair
     </button>
 
-    </mat-toolbar-row>
-</mat-toolbar>
-
-<mat-menu #accountMenu="matMenu">
-
-  <button mat-menu-item>
-    <mat-icon aria-hidden="false" aria-label="Settings Icon">settings</mat-icon>
-    Gerenciar Conta
-  </button>
-
-  <button mat-menu-item>
-    <mat-icon aria-hidden="false" aria-label="Exit Icont">exit_to_app</mat-icon>
-    Sair
-  </button>
-
-</mat-menu>
+  </mat-menu>
+</header>
