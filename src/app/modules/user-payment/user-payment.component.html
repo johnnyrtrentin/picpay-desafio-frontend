@@ -1,0 +1,28 @@
+<div class="spinner-loading" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-container *ngIf="!loading">
+  <div class="container__content">
+    <mat-list>
+      <mat-list-item
+        matRipple
+        matRippleCentered="true"
+        class="list-select"
+        *ngFor="let users of users$ | async"
+        (click)="userSelected(users)"
+      >
+        <img
+          matListAvatar
+          [src]="users.img"
+          alt="image of person {{ users.name }}"
+        />
+        <h3 matLine>{{ users.username }}</h3>
+        <p matLine>
+          <span> {{ users.name }} </span>
+        </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</ng-container>
