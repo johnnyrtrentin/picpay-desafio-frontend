@@ -1,1 +1,30 @@
-<p>payment-modal works!</p>
+<h1 mat-dialog-title>Realizar Pagamento</h1>
+<div mat-dialog-content>
+  <p>Você irá efetuar um pagamento para:</p>
+  <p>
+    <b>{{ data.user.name }}</b>
+  </p>
+
+  <mat-form-field class="form-field-modal" appearance="outline">
+    <mat-label>Valor</mat-label>
+    <input matInput cdkFocusInitial required />
+  </mat-form-field>
+
+  <mat-form-field class="form-field-modal" appearance="outline">
+    <mat-label>Cartão de crédito</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let creditCard of data.userCreditCards"
+        [value]="creditCard"
+        required
+      >
+        Cartão final: {{ creditCard.card_number | slice: 12:16 }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary">Realizar Pagamento</button>
+</div>
