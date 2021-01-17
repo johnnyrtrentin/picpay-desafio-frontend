@@ -1,3 +1,7 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import './assets/scss/variables';
+@import './assets/scss/helpers';
+
 * {
   box-sizing: border-box;
 }
@@ -7,7 +11,28 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  background-color: $background-color;
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container__content {
+  margin: 50px 40px;
+}
+
+.spinner-loading {
+  position: fixed;
+
+  width: 1em;
+  height: 1em;
+
+  z-index: 2;
+
+  margin: auto;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

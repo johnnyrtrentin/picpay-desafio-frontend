@@ -1,0 +1,12 @@
+.list-select {
+    cursor: pointer;
+
+    &:hover {
+        background-color: lightgray;
+    }
+}
+
+.form-field-modal {
+    display: block !important;
+    max-width: 200px;
+}

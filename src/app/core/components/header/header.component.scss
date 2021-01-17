@@ -1,4 +1,17 @@
 .header {
-    &__icons { flex: 1 1 auto; }
-    &__icons--padding { padding: 0 25px; }
+    &__icons { 
+        flex: 1 1 auto; 
+    }
+
+    &__icons--padding { 
+        padding: 0 25px; 
+    }
+
+    &__links {
+        padding-left: 30px; 
+    }
+}
+
+a:hover {
+    color: inherit !important;
 }
