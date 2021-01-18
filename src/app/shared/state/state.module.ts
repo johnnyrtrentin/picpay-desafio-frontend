@@ -7,10 +7,11 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { UsersState } from './users/users.state';
 import { environment } from 'src/environments/environment';
 import { CreditCardState } from './credit-card/credit-card.state';
+import { TransactionsState } from './transactions/transaction.state';
 
 @NgModule({
   imports: [
-    NgxsModule.forRoot([UsersState, CreditCardState], {
+    NgxsModule.forRoot([UsersState, CreditCardState, TransactionsState], {
       developmentMode: !environment.production
     }),
     NgxsLoggerPluginModule.forRoot({
