@@ -1,5 +1,9 @@
 export class CreditCardHelper {
-  static checkCreditcard(cardNumber: string): boolean {
+  /**
+   * Check if the credit card number is valid.
+   * @param cardNumber Credit card number
+   */
+  static creditCardNumberValidator(cardNumber: string): boolean {
     const finalCardNumbers = cardNumber.slice(12, 16);
     if (finalCardNumbers === '1234') {
       return false;

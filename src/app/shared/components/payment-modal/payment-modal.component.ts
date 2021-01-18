@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import {
   AbstractControl,
   FormBuilder,
@@ -8,11 +9,14 @@ import {
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { UserBalanceService } from 'src/app/core/services/user-balance.service';
+import { TransactionsService } from '../../state/services/transactions.service';
+
+import { CreditCardHelper } from '../../helpers/valid-card.helper';
+import { ToasterButtons, ToasterMessages } from '../../models/messages.enum';
 import {
   IPayment,
   ITransactionPayload,
 } from '../../state/models/transactions.interface';
-import { TransactionsService } from '../../state/services/transactions.service';
 
 @Component({
   selector: 'app-payment-modal',
@@ -22,10 +26,12 @@ import { TransactionsService } from '../../state/services/transactions.service';
 export class PaymentModalComponent implements OnInit {
   modalForm: FormGroup;
   userBalance: number;
+  modalLoading: boolean;
 
   constructor(
     private dialogRef: MatDialogRef<PaymentModalComponent>,
     private formBuilder: FormBuilder,
+    private snackBarService: MatSnackBar,
     private userBalanceService: UserBalanceService,
     private transactionsService: TransactionsService,
     @Inject(MAT_DIALOG_DATA) public data: IPayment
@@ -61,9 +67,9 @@ export class PaymentModalComponent implements OnInit {
   }
 
   /**
-   * Effect the payment to the user selected
+   * Send the data for payment
    */
-  public doPayment(): void {
+  public submitPayment(): void {
     const formValues = this.modalForm.value;
     const transactionPayload: ITransactionPayload = {
       card_number: formValues.paymentCreditCard.card_number,
@@ -73,7 +79,25 @@ export class PaymentModalComponent implements OnInit {
       value: formValues.paymentValue,
     };
 
-    this.userBalanceService.updateUserBalance(formValues.paymentValue);
+    this.modalLoading = true;
+
+    const isCreditCardValid = CreditCardHelper.creditCardNumberValidator(
+      formValues.paymentCreditCard.card_number
+    );
+
+    if (!isCreditCardValid) {
+      this.showToaster(ToasterMessages.ERROR, ToasterButtons.OK);
+      this.closeModal();
+    } else {
+      this.doPayment(transactionPayload);
+    }
+  }
+
+  /**
+   * Effect the payment to the user selected
+   */
+  private doPayment(transactionPayload: ITransactionPayload): void {
+    this.userBalanceService.updateUserBalance(transactionPayload.value);
     this.transactionsService
       .makeTransaction(transactionPayload)
       .subscribe((response) => {
@@ -83,8 +107,30 @@ export class PaymentModalComponent implements OnInit {
             this.data.user.name
           );
         }
-        this.dialogRef.close();
+
+        this.showToaster(ToasterMessages.SUCESS, ToasterButtons.OK);
+        this.closeModal();
       });
+  }
+
+  /**
+   * Display a feedback message with sucess or error after payment
+   * @param toasterMessage The message content
+   * @param buttonAction The button name
+   */
+  private showToaster(toasterMessage: string, buttonAction: string): void {
+    this.snackBarService.open(toasterMessage, buttonAction, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
+  /**
+   * Close the modal.
+   */
+  private closeModal(): void {
+    this.dialogRef.close();
   }
 }
 

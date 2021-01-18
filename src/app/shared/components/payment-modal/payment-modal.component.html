@@ -1,70 +1,81 @@
-<h1 mat-dialog-title>Realizar Pagamento</h1>
-<div mat-dialog-content [formGroup]="modalForm">
-  <mat-list>
-    <mat-list-item>
-      <p>Efetuando pagamento para:</p>
-    </mat-list-item>
-    <mat-list-item>
-      <div class="pr-3">
-        <img
-          matListAvatar
-          alt="image of person {{ data?.user?.name }}"
-          [src]="data?.user?.img"
-        />
-      </div>
-      <b>{{ data?.user?.name }}</b>
-    </mat-list-item>
-  </mat-list>
-
-  <mat-form-field class="form-field-modal mt-3" appearance="outline">
-    <mat-label>Valor</mat-label>
-    <input
-      matInput
-      currencyMask
-      cdkFocusInitial
-      formControlName="paymentValue"
-    />
-    <mat-error *ngIf="modalForm?.dirty && modalForm?.invalid">
-      <span *ngIf="modalForm.get('paymentValue').hasError('required')">
-        Por favor, insira um valor.
-      </span>
-      <span *ngIf="modalForm.get('paymentValue').hasError('min')">
-        Valor mínimo deve ser maior que R$0.01.
-      </span>
-      <span
-        *ngIf="modalForm.get('paymentValue').getError('insufficientBalance')"
-      >
-        Seu Saldo é insuficiente.
-      </span>
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-field-modal" appearance="outline">
-    <mat-label>Cartão de crédito</mat-label>
-    <mat-select formControlName="paymentCreditCard" required>
-      <mat-option
-        *ngFor="let creditCard of data.userCreditCards"
-        [value]="creditCard"
-      >
-        Cartão final: {{ creditCard?.card_number | slice: 12:16 }}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="modalForm?.dirty && modalForm?.invalid">
-      <span *ngIf="modalForm.get('paymentCreditCard').hasError('required')">
-        Selecione um cartão de crédito.
-      </span>
-    </mat-error>
-  </mat-form-field>
+<div class="transaction-loading" *ngIf="modalLoading">
+  <h5>Realizando transação!</h5>
+  <mat-spinner></mat-spinner>
 </div>
 
-<div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button
-    mat-raised-button
-    color="primary"
-    [disabled]="modalForm.invalid"
-    (click)="doPayment()"
-  >
-    Realizar Pagamento
-  </button>
-</div>
+<ng-container *ngIf="!modalLoading">
+  <h1 mat-dialog-title>Realizar Pagamento</h1>
+  <div mat-dialog-content [formGroup]="modalForm">
+    <mat-list>
+      <mat-list-item>
+        <p>Efetuando pagamento para:</p>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="pr-3">
+          <img
+            matListAvatar
+            alt="image of person {{ data?.user?.name }}"
+            [src]="data?.user?.img"
+          />
+        </div>
+        <b>{{ data?.user?.name }}</b>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-form-field class="form-field-modal mt-3" appearance="outline">
+      <mat-label>Valor</mat-label>
+      <input
+        matInput
+        currencyMask
+        cdkFocusInitial
+        formControlName="paymentValue"
+      />
+      <mat-error
+        *ngIf="(modalForm?.dirty && modalForm?.invalid) || modalForm?.touched"
+      >
+        <span *ngIf="modalForm.get('paymentValue').hasError('required')">
+          Por favor, insira um valor.
+        </span>
+        <span *ngIf="modalForm.get('paymentValue').hasError('min')">
+          Valor mínimo deve ser maior que R$0.01.
+        </span>
+        <span
+          *ngIf="modalForm.get('paymentValue').getError('insufficientBalance')"
+        >
+          Seu Saldo é insuficiente.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-modal" appearance="outline">
+      <mat-label>Cartão de crédito</mat-label>
+      <mat-select formControlName="paymentCreditCard" required>
+        <mat-option
+          *ngFor="let creditCard of data.userCreditCards"
+          [value]="creditCard"
+        >
+          Cartão final: {{ creditCard?.card_number | slice: 12:16 }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="(modalForm?.dirty && modalForm?.invalid) || modalForm?.touched"
+      >
+        <span *ngIf="modalForm.get('paymentCreditCard').hasError('required')">
+          Selecione um cartão de crédito.
+        </span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="modalForm.invalid"
+      (click)="submitPayment()"
+    >
+      Realizar Pagamento
+    </button>
+  </div>
+</ng-container>
