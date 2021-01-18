@@ -3,7 +3,7 @@ export interface UsersStateModel {
 }
 
 export interface IUsers {
-    id: string;
+    id: number;
     name: string;
     img: string;
     username: string;
