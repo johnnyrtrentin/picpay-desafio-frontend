@@ -81,7 +81,7 @@ export class PaymentModalComponent implements OnInit {
 
     this.modalLoading = true;
 
-    const isCreditCardValid = CreditCardHelper.creditCardNumberValidator(
+    const isCreditCardValid = CreditCardHelper.creditCardValidator(
       formValues.paymentCreditCard.card_number
     );
 
@@ -102,6 +102,7 @@ export class PaymentModalComponent implements OnInit {
       .makeTransaction(transactionPayload)
       .subscribe((response) => {
         if (response) {
+          this.transactionsService.increaseUserTransactionBadgeCount();
           this.transactionsService.userTransactionDispatcher(
             transactionPayload.value,
             this.data.user.name
