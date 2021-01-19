@@ -1,45 +1,43 @@
-<div class="container__content">
-  <div class="info">
-    <mat-card class="">
-      <mat-card-header class="info__header">
-        <mat-card-title>Feed de pagamentos</mat-card-title>
-      </mat-card-header>
+<div class="info container__content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Feed de pagamentos</mat-card-title>
+    </mat-card-header>
 
-      <div class="info__content info__content--center">
-        <mat-card-content>
-          <mat-list>
-            <mat-list-item>
-              Você ainda não efetuou nenhum pagamento!
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
-      </div>
-    </mat-card>
-  </div>
+    <div
+      [ngClass]="
+        (userTransactions$ | async).length > 2
+          ? 'info__content info__content--center info__content--overflow'
+          : 'info__content info__content--center'
+      "
+    >
+      <mat-card-content>
+        <mat-list *ngIf="!transactions.length; else transactionFeedTemplate">
+          <mat-list-item>
+            <span>Você ainda não efetuou nenhum pagamento!</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </div>
+  </mat-card>
 
-  <div class="row mt-md-5">
-    <div class="info">
-      <mat-card class="info__item">
-        <mat-card-header class="info__header">
-          <mat-card-title>Bem vindo(a)</mat-card-title>
+  <div class="row">
+    <div class="col-sm-6 mt-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Informações</mat-card-title>
         </mat-card-header>
 
         <div class="info__content">
-          <img
-            mat-card-image
-            [src]="'../../../assets/profile.jpg'"
-            alt="Profile Photo"
-            class="profile-image img-fluid"
-          />
           <mat-card-content>
             <mat-list>
               <mat-list-item>
-                No EasyPay seus pagamentos são feitos de forma fácil e
-                automática. Experimente esta incrível experiência na seção
-                "Pagamentos"
+                <div mat-line>
+                  Cartões cadastrados: {{ (creditCards$ | async).length }}
+                </div>
               </mat-list-item>
-              <mat-list-item class="info__content--padding-top">
-                Saldo Atual: {{ balance | currency: 'BRL' }}
+              <mat-list-item>
+                <div mat-line>Saldo Atual: {{ balance | currency: 'BRL' }}</div>
               </mat-list-item>
             </mat-list>
           </mat-card-content>
@@ -47,14 +45,13 @@
       </mat-card>
     </div>
 
-    <div class="info">
-      <mat-card class="info__item">
-        <mat-card-header class="info__header">
+    <div class="col-sm-6 mt-4">
+      <mat-card>
+        <mat-card-header>
           <mat-card-title>Seus Cartões</mat-card-title>
         </mat-card-header>
 
         <div
-          class="col-xs-4"
           [ngClass]="
             (creditCards$ | async).length > 3
               ? 'info__content info__content--overflow'
@@ -67,12 +64,25 @@
                 *ngFor="let card of creditCards$ | async"
                 class="credit-card"
               >
-                <mat-icon aria-hidden="false" aria-label="Credit card off icon">
-                  credit_card_off
+                <mat-icon
+                  *ngIf="cardValidator.creditCardValidator(card.card_number)"
+                  aria-hidden="false"
+                  aria-label="Credit card off icon"
+                  >credit_card_off
                 </mat-icon>
+                <mat-icon
+                  *ngIf="!cardValidator.creditCardValidator(card.card_number)"
+                  aria-hidden="false"
+                  aria-label="Credit card off icon"
+                  >credit_card</mat-icon
+                >
                 <div class="credit-card__info">
-                  <div>Número do cartão: {{ card.card_number }}</div>
-                  <div>Vencimento do cartão: {{ card.expiry_date }}</div>
+                  <div mat-line class="text-ellipsi">
+                    Terminado em {{ card.card_number | slice: 12:16 }}
+                  </div>
+                  <div mat-line class="text-ellipsi">
+                    Vencimento: {{ card.expiry_date }}
+                  </div>
                 </div>
               </mat-list-item>
             </mat-list>
@@ -82,3 +92,15 @@
     </div>
   </div>
 </div>
+
+<ng-template #transactionFeedTemplate>
+  <mat-list>
+    <mat-list-item *ngFor="let transaction of userTransactions$ | async">
+      <div mat-line>
+        Você efetuou um pagamento para {{ transaction.paymentUser }} no valor de
+        R${{ transaction.paymentValue }}
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</ng-template>

@@ -1,55 +1,33 @@
 .info {
-    margin-right: 45px;
+  &__item {
+    width: 100%;
+    max-width: 500px;
+  }
 
-    &__item {
-        width: 100%;
-        max-width: 500px;
-    }
+  &__content {
+    height: 140px;
+    max-height: 100%;
+  }
 
-    &__content {
-        display: flex;
+  &__content--overflow {
+    overflow: auto;
+  }
 
-        height: 140px;
-        max-height: 100%;
-    }
-
-    &__content--overflow {
-        overflow: auto;
-    }
-
-    &__content--center {
-        justify-content: center;
-        align-items: center;
-    }
-
-    &__content--padding-top {
-        padding-top: 18px !important;
-    }
-
-    &__content--padding-left {
-        padding-left: 18px !important;
-    }
-
-    &__header {
-        margin-bottom: 15px;
-    }
-}
-
-.feed-image {
-    width: 330px;
-    height: 100%;
-    max-height: 190px;
-}
-
-.profile-image {
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 140px;
+  &__content--center {
+    justify-content: center;
+  }
 }
 
 .credit-card {
-    &__info {
-        margin-left: 25px;
-        line-height: 1.7;
-    }
+  &__info {
+    margin-left: 25px;
+    line-height: 1.7;
+  }
+}
+
+// media queries
+@media (min-width: 576px) and (max-width: 768px) {
+  .text-ellipsi {
+    width: 110px;
+  }
 }

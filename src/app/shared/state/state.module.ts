@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { UsersState } from './users/users.state';
 import { environment } from 'src/environments/environment';
@@ -16,6 +17,9 @@ import { TransactionsState } from './transactions/transaction.state';
     }),
     NgxsLoggerPluginModule.forRoot({
         disabled: environment.production
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production
     }),
     HttpClientModule,
   ],
