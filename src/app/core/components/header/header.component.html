@@ -1,7 +1,6 @@
 <header>
   <mat-toolbar color="primary" class="header">
     <mat-toolbar-row>
-      
       <span>EasyPay</span>
 
       <nav class="header__links">
@@ -14,38 +13,46 @@
 
       <button
         mat-icon-button
-        matBadge="7"
+        [matBadge]="
+          !transactionService.transactionBadgeValue
+            ? null
+            : transactionService.transactionBadgeValue
+        "
         matBadgeColor="warn"
         matBadgeOverlap="true"
         matBadgeSize="small"
         class="header__icons--padding"
         aria-hidden="false"
-        aria-label="Credit Card Icon">
-          <mat-icon>payment</mat-icon>
+        aria-label="Credit Card Icon"
+      >
+        <mat-icon>payment</mat-icon>
       </button>
 
-      <button mat-icon-button
+      <button
+        mat-icon-button
         [matMenuTriggerFor]="accountMenu"
         class="header__icons--padding"
         aria-hidden="false"
-        aria-label="Account Icon">
-          <mat-icon>account_circle</mat-icon>
+        aria-label="Account Icon"
+      >
+        <mat-icon>account_circle</mat-icon>
       </button>
-
-      </mat-toolbar-row>
+    </mat-toolbar-row>
   </mat-toolbar>
 
   <mat-menu #accountMenu="matMenu">
-
     <button mat-menu-item>
-      <mat-icon aria-hidden="false" aria-label="Settings Icon">settings</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Settings Icon">
+        settings
+      </mat-icon>
       Gerenciar Conta
     </button>
 
     <button mat-menu-item>
-      <mat-icon aria-hidden="false" aria-label="Exit Icont">exit_to_app</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Exit Icont">
+        exit_to_app
+      </mat-icon>
       Sair
     </button>
-
   </mat-menu>
 </header>

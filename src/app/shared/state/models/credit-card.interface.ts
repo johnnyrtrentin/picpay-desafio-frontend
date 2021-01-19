@@ -7,8 +7,3 @@ export interface ICreditCard {
     card_number: string;
     expiry_date: string;
 }
-
-export enum CreditCardStatus {
-    VALID = 'valid',
-    INVALID = 'invalid'
-}

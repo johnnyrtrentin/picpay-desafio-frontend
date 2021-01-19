@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngxs/store';
 
-import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
 import { SetTransaction } from '../transactions/transactions.action';
 import { ITransactionPayload } from '../models/transactions.interface';
@@ -13,8 +13,9 @@ import { ITransactionPayload } from '../models/transactions.interface';
   providedIn: 'root',
 })
 export class TransactionsService {
-  private API_ENDPOINT =
-    'https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989';
+  private API_ENDPOINT = 'https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989';
+
+  private transactionsBadge = new BehaviorSubject<number>(0);
 
   constructor(
     private http: HttpClient,
@@ -34,9 +35,23 @@ export class TransactionsService {
   }
 
   /**
-   * Send the data of the current transaction to the container state
+   * Send the data of the current transaction to the state
    */
   public userTransactionDispatcher(paymentValue: number, paymentUser: string): void {
     this.store.dispatch(new SetTransaction(paymentValue, paymentUser));
+  }
+
+  /**
+   * Increase the value of the badge counter when user do a sucessfull payment
+   */
+  public increaseUserTransactionBadgeCount(): void {
+    this.transactionsBadge.next(this.transactionsBadge.getValue() + 1);
+  }
+
+  /**
+   * Return the badge value
+   */
+  get transactionBadgeValue(): number {
+    return this.transactionsBadge.getValue();
   }
 }

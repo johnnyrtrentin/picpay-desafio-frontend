@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionsService } from 'src/app/shared/state/services/transactions.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public transactionService: TransactionsService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void { }
 
 }
