@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   /**
    * Get all the transactions user from the state
    */
-  private fetchUserTransactions(): void {
+  public fetchUserTransactions(): void {
     this.userTransactions$
       .subscribe((userTransactions) => (this.transactions = userTransactions))
       .unsubscribe();
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
   /**
    * Get the current user balance value
    */
-  private fetchUserBalance(): void {
+  public fetchUserBalance(): void {
     this.balance = this.userBalanceService.userBalanceValue$.getValue();
   }
 }

@@ -8,8 +8,8 @@ import { CreditCardStateModel } from '../models/credit-card.interface';
     cards: [
       {
         card_number: '4111111111111234',
-        cvv: 789,
-        expiry_date: '01/18',
+        cvv: 123,
+        expiry_date: '01/20',
       },
       {
         card_number: '4111111111111111',

@@ -38,12 +38,12 @@ export class UserPaymentComponent implements OnInit {
   /**
    * Send a dispatcher to the state, to return all users
    */
-  private fetchUserList(): void {
+  public fetchUserList(): void {
     this.store
       .dispatch(new GetAllUsers())
       .pipe(withLatestFrom(this.users$))
       .subscribe(([storeValues, actionValues]) => {
-        if (actionValues) {
+        if (actionValues.length) {
           this.loading = false;
         }
       });

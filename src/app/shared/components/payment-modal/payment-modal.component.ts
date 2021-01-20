@@ -45,14 +45,14 @@ export class PaymentModalComponent implements OnInit {
   /**
    * Fetch the actual user balance, to send to validator before that is created.
    */
-  private fetchUserBalance(): void {
+  public fetchUserBalance(): void {
     this.userBalance = this.userBalanceService.userBalanceValue$.getValue();
   }
 
   /**
    * Create the form and your fields validations
    */
-  private createPaymentForm(): void {
+  public createPaymentForm(): void {
     this.modalForm = this.formBuilder.group({
       paymentValue: [
         '',
@@ -96,7 +96,7 @@ export class PaymentModalComponent implements OnInit {
   /**
    * Effect the payment to the user selected
    */
-  private doPayment(transactionPayload: ITransactionPayload): void {
+  public doPayment(transactionPayload: ITransactionPayload): void {
     this.userBalanceService.updateUserBalance(transactionPayload.value);
     this.transactionsService
       .makeTransaction(transactionPayload)

@@ -6,13 +6,13 @@
 
     <div
       [ngClass]="
-        (userTransactions$ | async).length > 2
+        (userTransactions$ | async)?.length > 2
           ? 'info__content info__content--center info__content--overflow'
           : 'info__content info__content--center'
       "
     >
       <mat-card-content>
-        <mat-list *ngIf="!transactions.length; else transactionFeedTemplate">
+        <mat-list *ngIf="!transactions?.length; else transactionFeedTemplate">
           <mat-list-item>
             <span>Você ainda não efetuou nenhum pagamento!</span>
           </mat-list-item>
@@ -33,7 +33,7 @@
             <mat-list>
               <mat-list-item>
                 <div mat-line>
-                  Cartões cadastrados: {{ (creditCards$ | async).length }}
+                  Cartões cadastrados: {{ (creditCards$ | async)?.length }}
                 </div>
               </mat-list-item>
               <mat-list-item>
@@ -53,7 +53,7 @@
 
         <div
           [ngClass]="
-            (creditCards$ | async).length > 3
+            (creditCards$ | async)?.length > 3
               ? 'info__content info__content--overflow'
               : 'info__content'
           "
