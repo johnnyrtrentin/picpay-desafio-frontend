@@ -15,3 +15,7 @@
 a:hover {
   color: inherit !important;
 }
+
+button:focus {
+  outline: none;
+}

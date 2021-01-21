@@ -11,10 +11,6 @@ const routes: Routes = [
     loadChildren: () => import('./modules/user-payment/user-payment.module').then((m) => m.UserPaymentModule)
   },
   {
-    path: 'register-card',
-    loadChildren: () => import ('./modules/register-card/register-card.module').then((m) => m.RegisterCardModule)
-  },
-  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',
