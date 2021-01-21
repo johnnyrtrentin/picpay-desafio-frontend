@@ -7,17 +7,17 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-
 import { NgxsModule } from '@ngxs/store';
 import { of } from 'rxjs';
 
-import { ICreditCard } from '../../state';
 import { SharedModule } from '../../shared.module';
 import { UserBalanceService } from 'src/app/core/services/user-balance.service';
 import { TransactionsService } from '../../state/services/transactions.service';
-import { IPayment, ITransactionPayload } from '../../state/models/transactions.interface';
 
 import { PaymentModalComponent } from './payment-modal.component';
+
+import * as paymentMock from '../../../core/mocks/payment.mock';
+import * as transactionMock from '../../../core/mocks/transaction.mock';
 
 describe('PaymentModalComponent', () => {
   let component: PaymentModalComponent;
@@ -30,38 +30,6 @@ describe('PaymentModalComponent', () => {
   let userBalanceService: UserBalanceService;
   let transactionsService: TransactionsService;
 
-  const modalDataMock: IPayment = {
-    user: {
-      id: 12,
-      img: 'http://localhost:3000/images/person',
-      name: 'Heisenberg',
-      username: '@saymyname',
-    },
-    userCreditCards: [
-      {
-        card_number: '4111111111111234',
-        cvv: 123,
-        expiry_date: '01/20',
-      },
-      {
-        card_number: '4111111111111111',
-        cvv: 789,
-        expiry_date: '01/18',
-      },
-    ],
-  };
-
-  const mockDialogRef = {
-    close: () => false,
-    beforeClosed: () => of({})
-  };
-
-  const transactionServiceMock = {
-    makeTransaction: () => of({}),
-    userTransactionDispatcher: () => {},
-    increaseUserTransactionBadgeCount: () => {}
-  };
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -72,9 +40,9 @@ describe('PaymentModalComponent', () => {
         ReactiveFormsModule
       ],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: modalDataMock },
-        { provide: MatDialogRef, useValue: mockDialogRef },
-        { provide: TransactionsService, useValue: transactionServiceMock }
+        { provide: MAT_DIALOG_DATA, useValue: paymentMock.modalData },
+        { provide: MatDialogRef, useValue: paymentMock.dialogRef },
+        { provide: TransactionsService, useValue: transactionMock.transactionService }
       ],
     }).compileComponents();
   }));
@@ -138,7 +106,7 @@ describe('PaymentModalComponent', () => {
     const valueField = component.modalForm.controls.paymentValue;
 
     errors = valueField.errors || {};
-    expect(errors['required']).toBeTruthy();
+    expect(errors[paymentMock.FormErros.REQUIRED]).toBeTruthy();
     expect(valueField.valid).toBeFalsy();
   });
 
@@ -148,8 +116,8 @@ describe('PaymentModalComponent', () => {
     valueField.setValue(0);
     errors = valueField.errors || {};
 
-    expect(errors['required']).toBeFalsy();
-    expect(errors['min']).toBeTruthy();
+    expect(errors[paymentMock.FormErros.REQUIRED]).toBeFalsy();
+    expect(errors[paymentMock.FormErros.MIN]).toBeTruthy();
     expect(valueField.valid).toBeFalsy();
   });
 
@@ -159,35 +127,30 @@ describe('PaymentModalComponent', () => {
     valueField.setValue(7_000);
     errors = valueField.errors || {};
 
-    expect(errors['required']).toBeFalsy();
-    expect(errors['min']).toBeFalsy();
-    expect(errors['insufficientBalance']).toBeTruthy();
+    expect(errors[paymentMock.FormErros.REQUIRED]).toBeFalsy();
+    expect(errors[paymentMock.FormErros.MIN]).toBeFalsy();
+    expect(errors[paymentMock.FormErros.INSUFFICIENT_BALLANCE]).toBeTruthy();
     expect(valueField.valid).toBeFalsy();
   });
 
   it('should validate the required credit card field', () => {
     const creditCardField = component.modalForm.controls.paymentCreditCard;
-    const required = 'required';
 
     expect(creditCardField.valid).toBeFalsy();
 
     errors = creditCardField.errors || {};
-    expect(errors['required']).toBeTruthy();
+    expect(errors[paymentMock.FormErros.REQUIRED]).toBeTruthy();
 
     creditCardField.setValue('4111111111111234');
     errors = creditCardField.errors || {};
-    expect(errors['required']).toBeFalsy();
+    expect(errors[paymentMock.FormErros.REQUIRED]).toBeFalsy();
   });
 
   it('should call payment transaction function when submit', () => {
-    const creditCard: ICreditCard = {
-      cvv: 142,
-      card_number: '1111111111111111',
-      expiry_date: '01/18'
-    };
+
     const doPaymentSpy = spyOn(component, 'doPayment').and.callThrough();
 
-    component.modalForm.controls.paymentCreditCard.setValue(creditCard);
+    component.modalForm.controls.paymentCreditCard.setValue(paymentMock.validCreditCard);
     component.modalForm.controls.paymentValue.setValue(250);
     component.submitPayment();
 
@@ -196,15 +159,11 @@ describe('PaymentModalComponent', () => {
   });
 
   it('shouldnt call payment transaction function when submit', () => {
-    const creditCard: ICreditCard = {
-      cvv: 142,
-      card_number: '4111111111111234',
-      expiry_date: '01/18'
-    };
+
     const doPaymentSpy = spyOn(component, 'doPayment').and.callThrough();
     const dialogRefSpy = spyOn(dialogRef, 'close');
 
-    component.modalForm.controls.paymentCreditCard.setValue(creditCard);
+    component.modalForm.controls.paymentCreditCard.setValue(paymentMock.invalidCreditCard);
     component.modalForm.controls.paymentValue.setValue(250);
     component.submitPayment();
 
@@ -213,38 +172,26 @@ describe('PaymentModalComponent', () => {
   });
 
   it('should do payment transaction', () => {
-    const creditCard: ICreditCard = {
-      cvv: 142,
-      card_number: '1111111111111111',
-      expiry_date: '01/18'
-    };
-    const transactionPayload: ITransactionPayload = {
-      card_number: creditCard.card_number,
-      cvv: creditCard.cvv,
-      expiry_date: creditCard.expiry_date,
-      value: 250,
-      destination_user_id: modalDataMock.user.id
-    };
     const dialogSpy = spyOn(dialogRef, 'close');
     const toasterSpy = spyOn(toaster, 'open');
     const doPaymentSpy = spyOn(component, 'doPayment').and.callThrough();
     const updateBalanceSpy = spyOn(userBalanceService, 'updateUserBalance').and.callThrough();
     const increaseBadgeSpy = spyOn(transactionsService, 'increaseUserTransactionBadgeCount').and.callThrough();
-    const makeTransactionSpy = spyOn(transactionsService, 'makeTransaction').and.returnValue(of(transactionPayload));
+    const makeTransactionSpy = spyOn(transactionsService, 'makeTransaction').and.returnValue(of(paymentMock.validTransactionPayload));
     const transactionDispatcherSpy = spyOn(transactionsService, 'userTransactionDispatcher').and.callThrough();
 
-    component.modalForm.controls.paymentCreditCard.setValue(creditCard);
+    component.modalForm.controls.paymentCreditCard.setValue(paymentMock.validCreditCard);
     component.modalForm.controls.paymentValue.setValue(250);
 
-    component.doPayment(transactionPayload);
+    component.doPayment(paymentMock.validTransactionPayload);
 
     expect(dialogSpy).toHaveBeenCalled();
     expect(toasterSpy).toHaveBeenCalled();
-    expect(doPaymentSpy).toHaveBeenCalledWith(transactionPayload);
+    expect(doPaymentSpy).toHaveBeenCalledWith(paymentMock.validTransactionPayload);
     expect(increaseBadgeSpy).toHaveBeenCalled();
     expect(updateBalanceSpy).toHaveBeenCalledWith(250);
     expect(makeTransactionSpy).toHaveBeenCalled();
-    expect(makeTransactionSpy).toHaveBeenCalledWith(transactionPayload);
+    expect(makeTransactionSpy).toHaveBeenCalledWith(paymentMock.validTransactionPayload);
     expect(transactionDispatcherSpy).toHaveBeenCalled();
   });
 });

@@ -1,11 +1,10 @@
+import { of } from 'rxjs';
 import {
   ITransactionPayload,
   ITransactionsModel,
 } from 'src/app/shared/state/models/transactions.interface';
 
-export const API_ENDPOINT_MOCK =
-  'https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989';
-
+export const API_ENDPOINT_MOCK = 'https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989';
 export interface ITransactionService {
   success: boolean;
   status: string;
@@ -45,4 +44,10 @@ export const dispatchValues: ITransactionsModel[] = [
 
 export const stateWithDispatchedValues = {
   transactions: dispatchValues
+};
+
+export const transactionService = {
+  makeTransaction: () => of({}),
+  userTransactionDispatcher: () => {},
+  increaseUserTransactionBadgeCount: () => {}
 };

@@ -7,27 +7,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgxsModule, Store } from '@ngxs/store';
 
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { CreditCardState, IUsers, UsersState } from 'src/app/shared/state';
+import { CreditCardState, UsersState } from 'src/app/shared/state';
 import { UsersService } from 'src/app/shared/state/services/users.service';
 
 import { UserPaymentComponent } from './user-payment.component';
 
-const usersMock: IUsers[] = [
-  {
-    id: 1,
-    img: 'http://localhost/imagem/tyrion',
-    name: 'Tyrion Targaryen',
-    username: '@tyriontargaryen',
-  },
-];
-export class UsersServiceMock {
-  fetchUsers = (): Observable<any> => of(usersMock);
-}
+import * as usersMock from '../../core/mocks/user.mock';
 
 describe('UserPaymentComponent', () => {
   let component: UserPaymentComponent;
@@ -47,7 +37,7 @@ describe('UserPaymentComponent', () => {
       providers: [
         {
           provide: UsersService,
-          useClass: UsersServiceMock,
+          useValue: usersMock.userService,
         },
       ],
     }).compileComponents();
@@ -106,22 +96,10 @@ describe('UserPaymentComponent', () => {
   });
 
   it('should open the payment modal', () => {
-    const [ user ] = usersMock;
-
+    const [ user ] = usersMock.user;
+    const userCreditCards = usersMock.userCreditCards;
     const modalSpy = spyOn(TestBed.get(MatDialog), 'open');
-    //TODO: pegar direito da store!
-    const userCreditCards = [
-      {
-        card_number: '4111111111111234',
-        cvv: 123,
-        expiry_date: '01/20',
-      },
-      {
-        card_number: '4111111111111111',
-        cvv: 789,
-        expiry_date: '01/18',
-      },
-    ];
+
     component.userSelected(user);
     component.creditCards$.subscribe(creditCards => {
       expect(creditCards).toBeDefined();

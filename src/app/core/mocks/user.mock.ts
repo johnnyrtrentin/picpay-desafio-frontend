@@ -1,10 +1,9 @@
 import { of } from 'rxjs';
 import { IUsers } from 'src/app/shared/state';
 
-export const API_ENDPOINT_MOCK =
-  'https://www.mocky.io/v2/5d531c4f2e0000620081ddce';
+export const API_ENDPOINT_MOCK = 'https://www.mocky.io/v2/5d531c4f2e0000620081ddce';
 
-export const user: IUsers[] = [
+export const users: IUsers[] = [
   {
     id: 1001,
     name: 'Eduardo Santos',
@@ -205,14 +204,31 @@ export const user: IUsers[] = [
   },
 ];
 
-export const defaultState = {
-  users: [],
+export const userService = {
+  fetchUsers: () => of(user)
 };
 
-export const userServiceMock = {
-  fetchUsers: () => of(user),
-};
+export const defaultState = { users: [] };
 
-export const stateWithDispatchedValues = {
-  users: user
-};
+export const user: IUsers[] = [
+  {
+    id: 1,
+    img: 'http://localhost/imagem/tyrion',
+    name: 'Tyrion Targaryen',
+    username: '@tyriontargaryen',
+  },
+];
+
+export const stateWithDispatchedValues = { users: user };
+export const userCreditCards = [
+  {
+    card_number: '4111111111111234',
+    cvv: 123,
+    expiry_date: '01/20',
+  },
+  {
+    card_number: '4111111111111111',
+    cvv: 789,
+    expiry_date: '01/18',
+  },
+];

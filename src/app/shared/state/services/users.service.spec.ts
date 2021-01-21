@@ -1,13 +1,14 @@
+import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { UsersService } from './users.service';
 
 import * as userMock from '../../../core/mocks/user.mock';
-import { HttpErrorResponse } from '@angular/common/http';
 
 describe('UsersService', () => {
   let httpTestingController: HttpTestingController;

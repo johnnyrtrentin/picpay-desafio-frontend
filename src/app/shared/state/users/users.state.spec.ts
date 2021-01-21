@@ -16,7 +16,7 @@ describe('UsersState', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, NgxsModule.forRoot([UsersState])],
       providers: [
-        { provide: UsersService, useValue: usersMock.userServiceMock },
+        { provide: UsersService, useValue: usersMock.userService },
       ],
     });
 
