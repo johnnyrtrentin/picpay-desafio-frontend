@@ -6,7 +6,6 @@ import { MatLine } from '@angular/material';
 import { NgxsModule, Store } from '@ngxs/store';
 import {
   CreditCardState,
-  ICreditCard,
   SetTransaction,
   TransactionsState,
 } from 'src/app/shared/state';
@@ -14,24 +13,13 @@ import {
 import { DashboardModule } from './dashboard.module';
 import { DashboardComponent } from './dashboard.component';
 
+import * as userMock from '../../core/mocks/user.mock';
+
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
   let store: Store;
-
-  const creditCardMock: ICreditCard[] = [
-    {
-      card_number: '4111111111111234',
-      cvv: 789,
-      expiry_date: '01/18',
-    },
-    {
-      card_number: '4111111111111111',
-      cvv: 789,
-      expiry_date: '01/18',
-    },
-  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -67,7 +55,7 @@ describe('DashboardComponent', () => {
   it('should display the credit cards quantity', () => {
     store.reset({
       ...store.snapshot(),
-      ...creditCardMock,
+      ...userMock.userCreditCards
     });
 
     const matLine = fixture.debugElement.queryAll(By.directive(MatLine));
@@ -79,7 +67,7 @@ describe('DashboardComponent', () => {
   it('should display the final numbers and due date of the credit cards', () => {
     store.reset({
       ...store.snapshot(),
-      ...creditCardMock,
+      ...userMock.userCreditCards
     });
 
     const matLine = fixture.debugElement.queryAll(By.directive(MatLine));
